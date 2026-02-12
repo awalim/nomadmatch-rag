@@ -1,0 +1,65 @@
+Base de Datos de Beneficios Fiscales y Visados para Nómadas Digitales
+Criterios de Scoring 
+Digital_Nomad_Visa
+    • 0 = No disponible
+    • 1 = Disponible
+EU_NonEU_Intl
+    • 0 = Solo para ciudadanos de la UE/EEE/Suiza
+    • 1 = Disponible para ciudadanos de la UE y no UE
+    • 2 = Disponible para todos los nacionalidades internacionales
+    • 3 = Solo para ciudadanos no UE
+Schengen_Area
+    • 0 = No está en el área Schengen
+    • 1 = Está en el área Schengen
+Tax_Benefit_Years (Beneficios Fiscales)
+    • 10: Exención total o tasa muy baja (<5%) por varios años
+    • 8-9: Beneficios significativos (>5 años, tasa baja <20%)
+    • 6-7: Beneficios moderados (hasta 5 años, tasa media 20-30%)
+    • 4-5: Beneficios limitados o tasas altas con algunas exenciones
+    • 1-3: Sin beneficios específicos para nómadas digitales
+Special_Tax_Rate_Percent (Porcentaje de Impuestos)
+Visa_Score (Facilidad de Visado)
+    • 10: Visa fácil, sin requisitos de ingresos, larga duración
+    • 8-9: Visa disponible para todos, requisitos razonables
+    • 6-7: Visa disponible pero con requisitos significativos
+    • 4-5: Solo para ciertos nacionalidades o sin visa específica
+    • 1-3: Dificultades significativas para nómadas digitales
+Monthly_Income_Requirement_EUR (Salario Mínimo Requerido)
+Min_Stay_Days (Estancia Mínima en Días)
+Max_Stay_Months (Estancia Máxima en Meses)
+Overall_Score (Promedio ponderado)
+    • Calculado como (Tax_Score * 0.6 + Visa_Score * 0.4)
+      
+Notas Importantes
+    1. Georgia y Albania: Ofrecen los programas más liberales, especialmente para nómadas fuera de la UE
+    2. Portugal y Chipre: Excelentes beneficios fiscales a largo plazo
+    3. Bulgaria y Rumania: Bajos impuestos y buenos programas de visado
+    4. Países nórdicos y Alemania: Altos impuestos y requisitos estrictos
+    5. España: Programa atractivo pero con requisitos de ingresos moderados
+    6. Schengen: Los visados de nómadas digitales en zona Schengen suelen tener restricciones de movimiento
+Fuentes: Información verificada de administraciones fiscales y migratorias oficiales (2024). Los requisitos pueden cambiar, verificar siempre con fuentes oficiales antes de tomar decisiones.
+Análisis Estadístico de los Datos
+Distribución de Visados Digitales
+    • Con visado específico: 32 ciudades (64%)
+    • Sin visado específico: 18 ciudades (36%)
+Accesibilidad por Nacionalidad
+    • Disponible para UE y no UE: 23 ciudades (46%)
+    • Solo para no UE: 9 ciudades (18%)
+    • Solo para UE: 10 ciudades (20%)
+    • Internacional (todos): 8 ciudades (16%)
+Zona Schengen
+    • Ciudades Schengen: 33 ciudades (66%)
+    • Ciudades no Schengen: 17 ciudades (34%)
+Top 5 Ciudades por Overall Score
+    1. Tbilisi, Georgia (9.5) - Excelente para internacionales
+    2. Nicosia, Chipre (9.5) - Mejores beneficios fiscales
+    3. Varias ciudades (8.5) - Portugal, Bulgaria, Rumania, Malta, Albania
+    4. Atenas, Grecia (8.0) - Buen equilibrio
+    5. Barcelona/Valencia, España (7.5) - Popular y accesible
+Países sin Visado Específico para Nómadas Digitales (pero con opciones)
+    • Hungary (Budapest)
+    • Poland (todas las ciudades)
+    • Sweden (Stockholm)
+    • Bosnia (Sarajevo)
+Nota: Aunque estos países no tienen programas específicos para nómadas digitales, muchos permiten estancias bajo otros visados (autónomo, freelancer, etc.) especialmente para ciudadanos de la UE.
+

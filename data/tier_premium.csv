@@ -1,0 +1,51 @@
+Country,City,Region,tier,Digital_Nomad_Visa,EU_NonEU_Intl,Tax_Benefit_Years,Special_Tax_Rate_Percent,Monthly_Income_Requirement_EUR,Min_Stay_Days,Max_Stay_Months,Schengen_Area,Tax_Score,Visa_Score,Overall_Score
+Portugal,Lisbon,Southern Europe,premium,1,1,10,20,3040,90,60,1,9,8,8.5
+Spain,Barcelona,Southern Europe,premium,1,1,6,24,2130,90,60,1,7,8,7.5
+Germany,Berlin,Central Europe,premium,1,1,0,42-45,4500,90,36,1,3,6,4.5
+Czech Republic,Prague,Central Europe,premium,1,1,0,15-23,5350,90,12,1,5,7,6
+Hungary,Budapest,Central Europe,premium,0,0,0,15,2000,90,90,1,5,4,4.5
+Estonia,Tallinn,Northern Europe,premium,1,1,0,20,3504,90,12,1,6,8,7
+Spain,Valencia,Southern Europe,premium,1,1,6,24,2130,90,60,1,7,8,7.5
+Portugal,Porto,Southern Europe,premium,1,1,10,20,3040,90,60,1,9,8,8.5
+Greece,Athens,Southern Europe,premium,1,1,7,0,3500,90,24,1,8,8,8
+Poland,Krakow,Central Europe,premium,0,0,0,12-32,0,90,90,1,6,4,5
+Croatia,Split,Southern Europe,premium,1,1,0,0,2260,90,12,1,7,7,7
+Bulgaria,Sofia,Eastern Europe,premium,1,1,10,10,2000,90,18,0,9,8,8.5
+Romania,Bucharest,Eastern Europe,premium,1,1,10,10,3300,90,36,0,9,8,8.5
+Georgia,Tbilisi,Caucasus,premium,1,2,365,1,0,365,365,0,10,9,9.5
+Serbia,Belgrade,Eastern Europe,premium,1,2,90,0,3500,90,12,0,7,7,7
+Lithuania,Vilnius,Northern Europe,premium,1,1,0,15-20,3720,90,12,1,6,7,6.5
+Latvia,Riga,Northern Europe,premium,1,1,0,20-31,2750,90,24,1,5,7,6
+Poland,Warsaw,Central Europe,premium,0,0,0,12-32,0,90,90,1,6,4,5
+Netherlands,Amsterdam,Western Europe,premium,1,3,0,30.5-49.5,0,90,24,1,3,5,4
+Denmark,Copenhagen,Northern Europe,premium,1,3,0,38-52,4600,90,6,1,2,5,3.5
+Sweden,Stockholm,Northern Europe,premium,0,0,0,20-25,0,90,90,1,5,4,4.5
+UK,Edinburgh,UK,premium,1,2,0,20-45,1850,180,24,0,4,7,5.5
+Ireland,Dublin,Western Europe,premium,1,3,0,20-40,0,90,12,0,4,5,4.5
+Germany,Munich,Western Europe,premium,1,1,0,42-45,4500,90,36,1,3,6,4.5
+Austria,Vienna,Western Europe,premium,1,3,6,0-20,0,90,6,1,7,5,6
+Malta,Malta,Southern Europe,premium,1,1,0,0,2700,90,36,1,8,9,8.5
+Spain,Málaga,Southern Europe,premium,1,1,6,24,2130,90,60,1,7,8,7.5
+France,Nice,Southern Europe,premium,1,3,0,30,3570,90,12,1,4,6,5
+Bosnia,Sarajevo,Balkans,premium,0,2,0,10,0,90,90,0,6,4,5
+Albania,Tirana,Balkans,premium,1,2,365,0,0,365,365,0,8,9,8.5
+Czech Republic,Brno,Central Europe,premium,1,1,0,15-23,5350,90,12,1,5,7,6
+Poland,Gdańsk,Central Europe,premium,0,0,0,12-32,0,90,90,1,6,4,5
+Slovenia,Ljubljana,Central Europe,premium,1,1,0,0,4000,90,12,1,6,7,6.5
+Romania,Cluj-Napoca,Eastern Europe,premium,1,1,10,10,3300,90,36,0,9,8,8.5
+Poland,Wrocław,Central Europe,premium,0,0,0,12-32,0,90,90,1,6,4,5
+Spain,Seville,Southern Europe,premium,1,1,6,24,2130,90,60,1,7,8,7.5
+Spain,Granada,Southern Europe,premium,1,1,6,24,2130,90,60,1,7,8,7.5
+Italy,Naples,Southern Europe,premium,1,3,5,0-10,0,90,12,1,8,6,7
+Greece,Thessaloniki,Southern Europe,premium,1,1,7,0,3500,90,24,1,8,8,8
+Bulgaria,Plovdiv,Eastern Europe,premium,1,1,10,10,2000,90,18,0,9,8,8.5
+Portugal,Funchal,Madeira,premium,1,1,10,20,3040,90,60,1,9,8,8.5
+Spain,Las Palmas,Gran Canaria,premium,1,1,6,24,2130,90,60,1,7,8,7.5
+Portugal,Coimbra,Southern Europe,premium,1,1,10,20,3040,90,60,1,9,8,8.5
+Romania,Timișoara,Eastern Europe,premium,1,1,10,10,3300,90,36,0,9,8,8.5
+Slovakia,Bratislava,Central Europe,premium,1,1,0,19-25,0,90,12,1,5,7,6
+Cyprus,Nicosia,Southern Europe,premium,1,1,17,0,3500,90,12,1,10,9,9.5
+Netherlands,Groningen,Northern Europe,premium,1,3,0,30.5-49.5,0,90,24,1,3,5,4
+Austria,Innsbruck,Western Europe,premium,1,3,6,0-20,0,90,6,1,7,5,6
+Ireland,Cork,Western Europe,premium,1,3,0,20-40,0,90,12,0,4,5,4.5
+Denmark,Aarhus,Northern Europe,premium,1,3,0,38-52,4600,90,6,1,2,5,3.5

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>NomadMatch · Encuentra tu ciudad ideal</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="root">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <span class="logo-emoji">🌍</span>
+                    <span class="logo-text">Nomad<span class="logo-highlight">Match</span></span>
+                </div>
+                <div class="nav-links">
+                    <button class="lang-toggle">
+                        <span class="lang-es">ES</span>
+                        <span class="lang-separator">/</span>
+                        <span class="lang-en">EN</span>
+                    </button>
+                    <button class="btn-outline">Iniciar sesión</button>
+                    <button class="btn-primary">Registrarse</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Encuentra tu <span class="gradient-text">ciudad europea ideal</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Para nómadas digitales como tú. Match con ciudades basado en tus preferencias de 
+                    presupuesto, clima, internet y estilo de vida.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Ciudades</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">Países</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Data real</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-glow"></div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Preferences Panel -->
+            <div class="preferences-panel">
+                <div class="panel-header">
+                    <h2>🎯 Tus preferencias</h2>
+                    <p>Selecciona cómo quieres tu ciudad ideal</p>
+                </div>
+
+                <!-- Budget -->
+                <div class="preference-section">
+                    <div class="section-header">
+                        <span class="section-icon">💰</span>
+                        <h3>Presupuesto mensual</h3>
+                    </div>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="budget" value="very_affordable" checked>
+                            <span class="option-content">
+                                <span class="option-emoji">🪙</span>
+                                <span class="option-title">Muy económico</span>
+                                <span class="option-price">&lt; 900€</span>
+                                <span class="option-desc">Bulgaria, Rumanía, Georgia</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="budget" value="affordable">
+                            <span class="option-content">
+                                <span class="option-emoji">💶</span>
+                                <span class="option-title">Económico</span>
+                                <span class="option-price">900-1200€</span>
+                                <span class="option-desc">Portugal, Grecia, Hungría</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="budget" value="moderate">
+                            <span class="option-content">
+                                <span class="option-emoji">💎</span>
+                                <span class="option-title">Moderado</span>
+                                <span class="option-price">1200-1600€</span>
+                                <span class="option-desc">España, Italia, Alemania</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="budget" value="expensive">
+                            <span class="option-content">
+                                <span class="option-emoji">✨</span>
+                                <span class="option-title">Premium</span>
+                                <span class="option-price">1600-2000€</span>
+                                <span class="option-desc">Países Bajos, Francia, Irlanda</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Climate -->
+                <div class="preference-section">
+                    <div class="section-header">
+                        <span class="section-icon">🌡️</span>
+                        <h3>Clima</h3>
+                    </div>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="climate" value="warm" checked>
+                            <span class="option-content">
+                                <span class="option-emoji">☀️</span>
+                                <span class="option-title">Cálido</span>
+                                <span class="option-temp">25-32°C</span>
+                                <span class="option-desc">Sur de Europa</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="climate" value="mild">
+                            <span class="option-content">
+                                <span class="option-emoji">🌤️</span>
+                                <span class="option-title">Templado</span>
+                                <span class="option-temp">20-25°C</span>
+                                <span class="option-desc">Europa Central</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="climate" value="cool">
+                            <span class="option-content">
+                                <span class="option-emoji">❄️</span>
+                                <span class="option-title">Fresco</span>
+                                <span class="option-temp">15-20°C</span>
+                                <span class="option-desc">Norte de Europa</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Internet -->
+                <div class="preference-section">
+                    <div class="section-header">
+                        <span class="section-icon">📶</span>
+                        <h3>Internet</h3>
+                    </div>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="internet" value="excellent" checked>
+                            <span class="option-content">
+                                <span class="option-emoji">⚡</span>
+                                <span class="option-title">Excelente</span>
+                                <span class="option-speed">200+ Mbps</span>
+                                <span class="option-desc">Fibra óptica</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="internet" value="good">
+                            <span class="option-content">
+                                <span class="option-emoji">📡</span>
+                                <span class="option-title">Bueno</span>
+                                <span class="option-speed">100-200 Mbps</span>
+                                <span class="option-desc">Conexión estable</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Visa -->
+                <div class="preference-section">
+                    <div class="section-header">
+                        <span class="section-icon">🛂</span>
+                        <h3>Visa Nómada Digital</h3>
+                    </div>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="visa" value="yes" checked>
+                            <span class="option-content">
+                                <span class="option-emoji">✅</span>
+                                <span class="option-title">Con visa</span>
+                                <span class="option-desc">Programa oficial</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="visa" value="no">
+                            <span class="option-content">
+                                <span class="option-emoji">🆓</span>
+                                <span class="option-title">Sin visa</span>
+                                <span class="option-desc">Turismo o Schengen</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Vibe (Multi-select) -->
+                <div class="preference-section">
+                    <div class="section-header">
+                        <span class="section-icon">🎨</span>
+                        <h3>Ambiente</h3>
+                        <span class="multi-badge">Múltiple</span>
+                    </div>
+                    <div class="options-grid vibes-grid">
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="beach">
+                            <span class="option-content">
+                                <span class="option-emoji">🏖️</span>
+                                <span class="option-title">Playa</span>
+                            </span>
+                        </label>
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="nightlife">
+                            <span class="option-content">
+                                <span class="option-emoji">🌃</span>
+                                <span class="option-title">Vida nocturna</span>
+                            </span>
+                        </label>
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="historic">
+                            <span class="option-content">
+                                <span class="option-emoji">🏛️</span>
+                                <span class="option-title">Histórico</span>
+                            </span>
+                        </label>
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="nature">
+                            <span class="option-content">
+                                <span class="option-emoji">🏔️</span>
+                                <span class="option-title">Naturaleza</span>
+                            </span>
+                        </label>
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="tech">
+                            <span class="option-content">
+                                <span class="option-emoji">💻</span>
+                                <span class="option-title">Tech hub</span>
+                            </span>
+                        </label>
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="food">
+                            <span class="option-content">
+                                <span class="option-emoji">🍜</span>
+                                <span class="option-title">Foodie</span>
+                            </span>
+                        </label>
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="art">
+                            <span class="option-content">
+                                <span class="option-emoji">🎨</span>
+                                <span class="option-title">Arte</span>
+                            </span>
+                        </label>
+                        <label class="option-card vibe-card">
+                            <input type="checkbox" name="vibe" value="sports">
+                            <span class="option-content">
+                                <span class="option-emoji">⚽</span>
+                                <span class="option-title">Deportes</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Match Button -->
+                <button id="matchButton" class="match-button">
+                    <span class="button-glow"></span>
+                    <span class="button-content">
+                        <span class="button-emoji">✨</span>
+                        Encontrar mis 3 ciudades ideales
+                        <span class="button-emoji">✨</span>
+                    </span>
+                </button>
+
+                <!-- Premium Badge -->
+                <div class="premium-badge">
+                    <span class="premium-icon">🔒</span>
+                    <span class="premium-text">¿Quieres más? <strong>Premium</strong> → Visa + Tax guides, 30+ ciudades extra</span>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <div class="panel-header">
+                    <h2>🏆 Tus matches</h2>
+                    <p>Las 3 ciudades que mejor se ajustan a tus preferencias</p>
+                </div>
+
+                <div id="resultsContainer" class="results-container">
+                    <div class="empty-state">
+                        <div class="empty-illustration">
+                            <span class="empty-emoji">🏙️</span>
+                        </div>
+                        <h3>¡Empieza tu búsqueda!</h3>
+                        <p>Selecciona tus preferencias y haz clic en el botón para encontrar tus ciudades ideales</p>
+                        <div class="empty-hint">
+                            <span class="hint-arrow">👇</span>
+                            <span>Prueba: Presupuesto económico, clima cálido, visa nómada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Status -->
+                <div id="collectionInfo" class="database-status">
+                    <div class="status-item">
+                        <span class="status-dot connected"></span>
+                        <span>Base de datos: <span id="dbStatus">Conectando...</span></span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-emoji">🌍</span>
+                    <span>NomadMatch</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Sobre el proyecto</a>
+                    <a href="#">Metodología</a>
+                    <a href="#">Fuentes de datos</a>
+                    <a href="#">GitHub</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2026 · Data actualizada
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

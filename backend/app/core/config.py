@@ -9,7 +9,7 @@ class Settings:
     PROJECT_NAME: str = "NomadMatch RAG API"
     
     # Langflow Settings
-    LANGFLOW_URL: str = os.getenv("LANGFLOW_URL", "http://localhost:7860")
+    LANGFLOW_URL: str = os.getenv("LANGFLOW_URL", "http://langflow:7860")
     LANGFLOW_FLOW_ID: str = os.getenv("LANGFLOW_FLOW_ID", "768c1c22-1496-4ccb-8e6f-40a09f44ae3c")
     
     # OpenAI Settings

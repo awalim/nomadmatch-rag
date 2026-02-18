@@ -16,24 +16,22 @@
 <body>
     <div id="root">
         <!-- Navbar -->
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <span class="logo-emoji">🌍</span>
-                    <span class="logo-text">Nomad<span class="logo-highlight">Match</span></span>
-                </div>
-                <div class="nav-links">
-                    <button class="lang-toggle">
-                        <span class="lang-es">ES</span>
-                        <span class="lang-separator">/</span>
-                        <span class="lang-en">EN</span>
-                    </button>
-                    <button class="btn-outline">Iniciar sesión</button>
-                    <button class="btn-primary">Registrarse</button>
-                </div>
-            </div>
-        </nav>
-
+	<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="logo-nomadmatch-darkbg-trans.png" alt="NomadMatch" style="height: 80px; width: auto;">
+        </div>
+        <div class="nav-links">
+            <button class="lang-toggle">
+                <span class="lang-es">ES</span>
+                <span class="lang-separator">/</span>
+                <span class="lang-en">EN</span>
+            </button>
+            <button class="btn-outline">Iniciar sesión</button>
+            <button class="btn-primary">Registrarse</button>
+        </div>
+    </div>
+</nav>
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
@@ -42,7 +40,7 @@
                 </h1>
                 <p class="hero-subtitle">
                     Para nómadas digitales como tú. Match con ciudades basado en tus preferencias de 
-                    presupuesto, clima, internet y estilo de vida.
+                    presupuesto, clima y estilo de vida.
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -154,33 +152,6 @@
                     </div>
                 </div>
 
-                <!-- Internet -->
-                <div class="preference-section">
-                    <div class="section-header">
-                        <span class="section-icon">📶</span>
-                        <h3>Internet</h3>
-                    </div>
-                    <div class="options-grid">
-                        <label class="option-card">
-                            <input type="radio" name="internet" value="excellent" checked>
-                            <span class="option-content">
-                                <span class="option-emoji">⚡</span>
-                                <span class="option-title">Excelente</span>
-                                <span class="option-speed">200+ Mbps</span>
-                                <span class="option-desc">Fibra óptica</span>
-                            </span>
-                        </label>
-                        <label class="option-card">
-                            <input type="radio" name="internet" value="good">
-                            <span class="option-content">
-                                <span class="option-emoji">📡</span>
-                                <span class="option-title">Bueno</span>
-                                <span class="option-speed">100-200 Mbps</span>
-                                <span class="option-desc">Conexión estable</span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
 
                 <!-- Visa -->
                 <div class="preference-section">
@@ -288,7 +259,7 @@
                 <!-- Premium Badge -->
                 <div class="premium-badge">
                     <span class="premium-icon">🔒</span>
-                    <span class="premium-text">¿Quieres más? <strong>Premium</strong> → Visa + Tax guides, 30+ ciudades extra</span>
+                    <span class="premium-text">¿Quieres más? <strong>Premium</strong> → Gestor de Visados + Guías de Impuestos!</span>
                 </div>
             </div>
 
@@ -297,7 +268,7 @@
                 <div class="panel-header">
                     <h2>🏆 Tus matches</h2>
                     <p>Las 3 ciudades que mejor se ajustan a tus preferencias</p>
-                </div>
+             </div>
 
                 <div id="resultsContainer" class="results-container">
                     <div class="empty-state">
@@ -322,27 +293,65 @@
                 </div>
             </div>
         </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-emoji">🌍</span>
-                    <span>NomadMatch</span>
+<div id="authModal" class="modal">
+    <div class="modal-wrapper">
+        <div class="modal-content auth-box">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title" id="authTitle">Crear cuenta</h2>
+            <p class="modal-subtitle" id="authSubtitle">Únete a la comunidad de nómadas</p>
+            
+            <form id="authForm" class="modal-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="userEmail" placeholder="tu@email.com" required>
                 </div>
-                <div class="footer-links">
-                    <a href="#">Sobre el proyecto</a>
-                    <a href="#">Metodología</a>
-                    <a href="#">Fuentes de datos</a>
-                    <a href="#">GitHub</a>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="userPass" placeholder="••••••••" required>
                 </div>
-                <div class="footer-copyright">
-                    © 2026 · Data actualizada
-                </div>
-            </div>
-        </footer>
+                <button type="submit" class="btn-primary w-100">Continuar</button>
+            </form>
+        </div>
     </div>
+</div>
 
+<div id="premiumModal" class="modal">
+    <div class="modal-wrapper">
+        <div class="modal-content premium-box">
+            <span class="close-modal">&times;</span>
+            <div class="premium-tag">TIER PREMIUM</div>
+            <h2 class="modal-title">Desbloquea datos de visados</h2>
+            <p class="modal-subtitle">Acceso exclusivo a la base de datos <strong>tier_premium.csv</strong> con requisitos legales detallados.</p>
+            
+            <div class="premium-features">
+                <div class="feature-item"><span>✅</span> Info de Visados Nómadas</div>
+                <div class="feature-item"><span>✅</span> Filtros Avanzados</div>
+                <div class="feature-item"><span>✅</span> Biblioteca ilimitada</div>
+            </div>
+            
+            <button class="btn-primary w-100" id="upgradeBtn">Subir a Premium</button>
+        </div>
+    </div>
+</div>
+        <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="logo-nomadmatch-darkbg-trans.png" alt="NomadMatch" style="height: 35px; width: auto;">
+        </div>
+
+        <div class="footer-links">
+            <a href="#">Sobre el proyecto</a>
+            <a href="#">Metodología</a>
+            <a href="#">Fuentes de datos</a>
+            <a href="#">GitHub</a>
+        </div>
+
+        <div class="footer-copyright">
+            © 2026 · Data actualizada
+        </div>
+    </div>
+</footer>
     <script src="app.js"></script>
 </body>
 </html>

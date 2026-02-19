@@ -1,15 +1,19 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi import APIRouter, HTTPException, UploadFile, File, Depends
 import pandas as pd
 from io import StringIO
 import os
 from typing import List, Dict, Any, Optional
-
+from pydantic import BaseModel
 from ..utils.chroma_utils import ChromaManager
+from ..utils.llm_utils import generate_premium_advice
 from ..models.schemas import (
     ChatRequest, ChatResponse,
     DocumentUploadResponse, HealthResponse,
     QueryRequest, QueryResponse
 )
+from ..api.auth import get_current_user
+from ..models.user import User
+
 
 router = APIRouter()
 chroma_manager = ChromaManager()
@@ -36,12 +40,8 @@ async def upload_document(file: UploadFile = File(...)):
     try:
         content = await file.read()
         df = pd.read_csv(StringIO(content.decode('utf-8')))
-        
-        # Filter for General tier only (free users)
-        if 'data_type' in df.columns:
-            df = df[df['data_type'] == 'General']
-        
-        chunks_processed = chroma_manager.ingest_dataframe(df, file.filename)
+        local_chroma = ChromaManager()
+        chunks_processed = local_chroma.ingest_dataframe(df, file.filename)
         
         return DocumentUploadResponse(
             message="✅ Document uploaded successfully",
@@ -51,8 +51,14 @@ async def upload_document(file: UploadFile = File(...)):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-# Chat endpoint
+        
+        # Filter for General tier only (free users)
+        # if 'data_type' in df.columns:
+        #    df = df[df['data_type'] == 'General']
+        
+        chunks_processed = chroma_manager.ingest_dataframe(df, file.filename)
+        
+        # Chat endpoint
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     """Send a message to find cities"""
@@ -84,11 +90,11 @@ async def chat(request: ChatRequest):
 async def query_vector_db(request: QueryRequest):
     """Direct query to ChromaDB"""
     try:
-        results = chroma_manager.similarity_search(
+        local_chroma = ChromaManager()  # instancia fresca
+        results = local_chroma.similarity_search(
             request.query, 
             k=request.num_results or 10
         )
-        
         return QueryResponse(
             results=results,
             query=request.query,
@@ -96,7 +102,7 @@ async def query_vector_db(request: QueryRequest):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
+        
 # Collections endpoint
 @router.get("/collections")
 async def get_collections():
@@ -110,3 +116,34 @@ async def get_collections():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+class PremiumAdviceResponse(BaseModel):
+    results: List[Dict[str, Any]]
+    query: str
+    count: int
+    advice: str  # texto generado por IA
+
+@router.post("/premium/advice", response_model=PremiumAdviceResponse)
+async def premium_advice(
+    request: QueryRequest,
+    current_user: User = Depends(get_current_user)
+):
+    if not current_user.is_premium:
+        raise HTTPException(status_code=403, detail="Se requiere suscripción premium")
+    
+    # Crear instancia local para asegurar conexión actual
+    local_chroma = ChromaManager()
+    results = local_chroma.premium_search_with_scoring(request.query, k=request.num_results or 10)
+    
+    # Generar respuesta humana usando IA
+    advice = generate_premium_advice(request.query, results)
+    
+    return PremiumAdviceResponse(
+        results=results,
+        query=request.query,
+        count=len(results),
+        advice=advice
+    )
+    

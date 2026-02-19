@@ -68,7 +68,7 @@
                     <h2>🎯 Tus preferencias</h2>
                     <p>Selecciona cómo quieres tu ciudad ideal</p>
                 </div>
-
+       
                 <!-- Budget -->
                 <div class="preference-section">
                     <div class="section-header">
@@ -263,14 +263,20 @@
                 </div>
             </div>
 
-            <!-- Results Panel -->
+                        <!-- Results Panel -->
             <div class="results-panel">
                 <div class="panel-header">
                     <h2>🏆 Tus matches</h2>
                     <p>Las 3 ciudades que mejor se ajustan a tus preferencias</p>
-             </div>
+                    <!-- Tabs para free / premium -->
+                    <div class="result-tabs">
+                        <button class="tab-button active" data-tab="free">Matches Free</button>
+                        <button class="tab-button" data-tab="premium">Premium Insights</button>
+                    </div>
+                </div>
 
-                <div id="resultsContainer" class="results-container">
+                <!-- Contenedor para resultados gratuitos (el que ya tenías) -->
+                <div id="freeResults" class="results-container">
                     <div class="empty-state">
                         <div class="empty-illustration">
                             <span class="empty-emoji">🏙️</span>
@@ -281,6 +287,18 @@
                             <span class="hint-arrow">👇</span>
                             <span>Prueba: Presupuesto económico, clima cálido, visa nómada</span>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Contenedor para resultados premium (oculto inicialmente) -->
+                <div id="premiumResults" class="results-container" style="display: none;">
+                    <div class="empty-state premium-empty">
+                        <div class="empty-illustration">
+                            <span class="empty-emoji">🔒</span>
+                        </div>
+                        <h3>Contenido exclusivo para usuarios premium</h3>
+                        <p>Inicia sesión y actualiza tu cuenta para acceder a guías de visados e impuestos.</p>
+                        <button class="btn-primary" id="premiumUpgradeBtn">Actualizar a Premium</button>
                     </div>
                 </div>
 

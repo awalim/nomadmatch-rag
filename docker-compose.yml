@@ -11,8 +11,6 @@ services:
       - chroma_data:/app/chroma_data
     env_file:
       - ./backend/.env
-    environment:
-      - LANGFLOW_URL=${LANGFLOW_URL:-http://langflow:7860}
     networks:
       - nomadmatch-network
     restart: unless-stopped
@@ -30,24 +28,9 @@ services:
       - nomadmatch-network
     restart: unless-stopped
 
-  langflow:
-    image: langflowai/langflow:latest
-    ports:
-      - "7860:7860"
-    volumes:
-      - ./langflow_data:/app/data
-    environment:
-      - LANGFLOW_AUTO_LOGIN=true
-      - LANGFLOW_DATABASE_URL=sqlite:////app/data/langflow.db
-    user: "1000:1000"  # Add this line to run as your user
-    networks:
-      - nomadmatch-network
-    restart: unless-stopped
-
 networks:
   nomadmatch-network:
     driver: bridge
 
 volumes:
   chroma_data:
-  langflow_data:

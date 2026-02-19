@@ -779,3 +779,39 @@ body {
 }
 
 .w-100 { width: 100%; }
+
+/* Pestañas para resultados */
+.result-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.tab-button {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    transition: all 0.2s;
+}
+
+.tab-button.active {
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+    border-bottom: 2px solid var(--accent-primary);
+}
+
+.tab-button:hover {
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+/* Estilo para el estado vacío premium */
+.premium-empty .btn-primary {
+    margin-top: 1rem;
+}

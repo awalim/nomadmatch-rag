@@ -14,6 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ENV PYTHONPATH=/app
+ENV OPENAI_API_KEY=${OPENAI_API_KEY}
+
 
 
 EXPOSE 8000

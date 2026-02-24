@@ -78,7 +78,11 @@ sleep 10  # Esperar a que el backend inicie
 ## 4. CARGAR LOS DATOS:
 # Subir dataset de 50 ciudades
 curl -X POST http://localhost:8000/api/v1/upload \
-  -F "file=@./data/nomadmatch_european_cities.csv"
+  -F "file=@./data/city_general_free.csv"
+curl -X POST http://localhost:8000/api/v1/upload \
+  -F "file=@./data/city_tax_premium.csv"
+curl -X POST http://localhost:8000/api/v1/upload \
+  -F "file=@./data/city_visa_premium.csv"
 
 ### 5. ¡Usar!
 Frontend: http://localhost:3000

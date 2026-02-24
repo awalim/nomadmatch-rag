@@ -200,4 +200,113 @@ nomadmatch-rag/
 
 ## 📊 Datasets
 
-El proyecto incluye **3 CSVs** con datos de 50 ciudades eur
+El proyecto incluye **3 CSVs** con datos de 50 ciudades europeas:
+
+### `city_general_free.csv` (91 columnas)
+Datos generales accesibles para todos los usuarios:
+- 💰 **Costos:** Alquiler (studio, 1BR, 2BR, 3BR), presupuesto mensual, coworking
+- 📶 **Internet:** Velocidad (Mbps), fiabilidad
+- 🌡️ **Clima:** Temperatura por estación, horas de sol, lluvia, humedad
+- 🏥 **Vida:** Seguridad, sanidad, transporte, bici, walkability
+- 👥 **Comunidad:** Tamaño expat, escena nómada, nivel de inglés
+- 🎨 **Vibes:** Nightlife, dating, familia, startup, outdoor, arte, LGBTQ+
+
+### `city_visa_premium.csv` (18 columnas)
+Datos exclusivos premium sobre visados nómada digital:
+- 🛂 Tipo de visa, duración, elegibilidad
+- 💶 Requisito de ingresos mínimos
+- 📅 Estancia mínima/máxima
+- 🇪🇺 Zona Schengen
+
+### `city_tax_premium.csv` (17 columnas)
+Datos exclusivos premium sobre fiscalidad:
+- 📊 Tasa impositiva estándar y especial
+- 🏛️ Regímenes especiales (NHR, Beckham Law, IP Box, etc.)
+- ⏰ Años de beneficio fiscal
+- 🏆 Scoring fiscal y global
+
+---
+
+## ❤️ Sistema Match / Skip
+
+Los usuarios registrados pueden interactuar con las ciudades:
+
+- **❤️ Match:** Marca la ciudad como favorita (botón rojo). La tarjeta permanece visible.
+- **✖️ Skip:** Descarta la ciudad (animación slide-out). Se oculta del feed.
+- **📋 Pestaña Favs:** Lista de Matches y Skips. Se puede cambiar de opinión o eliminar.
+- **🔄 Cambio de opinión:** Mover de Skip a Match (o viceversa) actualiza el feed automáticamente.
+
+---
+
+## 🧑‍💻 Flujo de trabajo para el equipo
+
+### Ramas
+
+| Rama | Uso |
+|------|-----|
+| `main` | Producción, siempre estable |
+| `develop` | Integración de features |
+| `feature/*` | Features nuevas (ej: `feature/prototipo-5`) |
+
+### Convención de commits
+
+```
+feat:     Nueva funcionalidad
+fix:      Corrección de bug
+style:    Cambios de formato, CSS
+refactor: Refactorización de código
+docs:     Documentación
+chore:    Cambios en build, docker, etc.
+```
+
+### Para añadir una feature
+
+```bash
+git checkout -b feature/nueva-funcionalidad
+# ... trabajar ...
+git add .
+git commit -m "feat: descripción de la feature"
+git push origin feature/nueva-funcionalidad
+# → Crear Pull Request en GitHub
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Docker Desktop no está corriendo
+```
+open //./pipe/dockerDesktopLinuxEngine: El sistema no puede encontrar el archivo especificado
+```
+→ Abre Docker Desktop y espera a que esté listo antes de `docker-compose up`.
+
+### Puerto ya ocupado
+```
+Bind for 0.0.0.0:3000 failed: port is already allocated
+```
+→ Ejecuta `docker ps --filter "publish=3000"`, para el contenedor que lo usa, o cambia el puerto en `docker-compose.yml`.
+
+### API Key inválida (error 401 en ingesta)
+```
+Incorrect API key provided: sk-tu-cl****aqui
+```
+→ Configura tu API key real: `set OPENAI_API_KEY=sk-proj-TU_CLAVE_REAL` y haz `docker-compose down && docker-compose up --build -d`.
+
+### ChromaDB vacío después de reiniciar
+→ Los datos se persisten en un volumen Docker (`chroma_data`). Si eliminaste el volumen (`docker-compose down -v`), la auto-ingesta los recargará al siguiente arranque.
+
+---
+
+## 🤝 Contribuir
+
+1. Fork el proyecto
+2. Crea tu rama (`git checkout -b feature/amazing-feature`)
+3. Commit (`git commit -m 'feat: add amazing feature'`)
+4. Push (`git push origin feature/amazing-feature`)
+5. Abre un Pull Request
+
+---
+
+## 📄 Licencia
+
+MIT © 2026 NomadMatch Team

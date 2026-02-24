@@ -76,7 +76,7 @@ Los usuarios seleccionan sus preferencias (presupuesto, clima, internet, visa, a
 ```bash
 git clone https://github.com/awalim/nomadmatch-rag.git
 cd nomadmatch-rag
-git checkout feature/prototipo-5
+git checkout prototipo-5
 ```
 
 ### 2. Configurar la API Key de OpenAI

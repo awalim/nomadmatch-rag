@@ -1,0 +1,14 @@
+{
+  "name": "nomadmatch-frontend",
+  "version": "1.0.0",
+  "description": "NomadMatch - Encuentra tu ciudad europea ideal",
+  "main": "public/app.js",
+  "scripts": {
+    "start": "live-server public --port=3000 --host=0.0.0.0 --no-browser --watch=public",
+    "dev": "live-server public --port=3000 --host=0.0.0.0 --watch=public"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

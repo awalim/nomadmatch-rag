@@ -1,0 +1,32 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/external_data       # CSVs raíz (general, visa, tax)
+      - chroma_data:/app/chroma_data    # Datos de ChromaDB persistentes
+    environment:
+      - CHROMA_PERSIST_DIR=/app/chroma_data
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=sqlite:////app/chroma_data/users.db
+    networks:
+      - nomadmatch-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - nomadmatch-network
+    restart: unless-stopped
+
+networks:
+  nomadmatch-network:
+    driver: bridge
+
+volumes:
+  chroma_data:

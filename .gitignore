@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+venv/
+env/
+ENV/
+.idea/
+.vscode/
+
+# Backend
+backend/__pycache__/
+backend/.env
+backend/.env.local
+backend/.env.*.local
+backend/chroma_data/
+backend/app/__pycache__/
+
+# Frontend
+frontend/node_modules/
+frontend/package-lock.json
+frontend/.env
+frontend/.env.local
+frontend/dist/
+frontend/build/
+
+# Data - NO SUBIR DATOS CRUDOS (solo muestras)
+data/*.xlsx
+data/*.pdf
+data/*.db
+!data/sample_cities.csv
+!data/README.md
+
+# ChromaDB - Base de datos vectorial (NO SUBIR)
+chroma_data/
+backend/chroma_data/
+langflow_data/
+
+# Docker
+*.pid
+*.pid.lock
+docker-compose.override.yml
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db

@@ -6,11 +6,14 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
-      - ./data:/app/data
-      - chroma_data:/app/chroma_data
-    env_file:
-      - ./backend/.env
+      - ./data:/app/data                # CSVs
+      - chroma_data:/app/chroma_data    # Datos de ChromaDB
+      - ./backend/users.db:/app/users.db  # Base de datos SQLite
+    environment:
+      - CHROMA_PERSIST_DIR=/app/chroma_data
+      - CITIES_CSV_PATH=/app/data/cities.csv
+      - DATABASE_URL=sqlite:///app/users.db
+      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Opcional
     networks:
       - nomadmatch-network
     restart: unless-stopped
@@ -18,10 +21,7 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - "8080:80"  # El contenedor expone el puerto 80 (nginx)
     depends_on:
       - backend
     networks:

@@ -12,34 +12,33 @@ COLLECTION_NAME = "nomadmatch_cities"
 
 class ChromaManager:
     def __init__(self):
-        chroma_host = os.getenv("CHROMA_HOST", "localhost")
-        chroma_port = int(os.getenv("CHROMA_PORT", "8000"))
-        
-        try:
-            self.client = chromadb.HttpClient(host=chroma_host, port=chroma_port)
-            self.client.heartbeat()
-            print(f"✅ Connected to ChromaDB at {chroma_host}:{chroma_port}")
-        except Exception as e:
-            print(f"⚠️ ChromaDB HTTP failed, using PersistentClient: {e}")
-            self.client = chromadb.PersistentClient(path="/app/chroma_data")
-        
-        openai_key = os.getenv("OPENAI_API_KEY", "")
-        if openai_key:
-            self.embedding_fn = embedding_functions.OpenAIEmbeddingFunction(
-                api_key=openai_key,
-                model_name="text-embedding-3-small"
-            )
-            print("✅ Using OpenAI text-embedding-3-small (1536 dims)")
-        else:
-            self.embedding_fn = embedding_functions.DefaultEmbeddingFunction()
-            print("⚠️ No OPENAI_API_KEY — using default embeddings")
-        
-        self.collection = self.client.get_or_create_collection(
-            name=COLLECTION_NAME,
-            embedding_function=self.embedding_fn,
-            metadata={"hnsw:space": "cosine"}
+    # Usar siempre cliente persistente (más simple para Docker)
+    persist_dir = os.getenv("CHROMA_PERSIST_DIR", "./chroma_data")
+    # Si es una ruta relativa, conviértela a absoluta dentro del proyecto
+    if not os.path.isabs(persist_dir):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        persist_dir = os.path.join(base_dir, persist_dir)
+    os.makedirs(persist_dir, exist_ok=True)
+    self.client = chromadb.PersistentClient(path=persist_dir)
+    print(f"✅ ChromaDB PersistentClient usando directorio: {persist_dir}")
+
+    openai_key = os.getenv("OPENAI_API_KEY", "")
+    if openai_key:
+        self.embedding_fn = embedding_functions.OpenAIEmbeddingFunction(
+            api_key=openai_key,
+            model_name="text-embedding-3-small"
         )
-    
+        print("✅ Using OpenAI text-embedding-3-small (1536 dims)")
+    else:
+        self.embedding_fn = embedding_functions.DefaultEmbeddingFunction()
+        print("⚠️ No OPENAI_API_KEY — using default embeddings")
+
+    self.collection = self.client.get_or_create_collection(
+        name=COLLECTION_NAME,
+        embedding_function=self.embedding_fn,
+        metadata={"hnsw:space": "cosine"}
+    )
+
     def get_stats(self) -> dict:
         count = self.collection.count()
         return {
@@ -48,7 +47,7 @@ class ChromaManager:
             "embedding_model": "text-embedding-3-small",
             "dimensions": 1536
         }
-    
+
     def build_document(self, row: dict) -> str:
         """Build enriched text document for embedding from a city row."""
         parts = [
@@ -77,7 +76,7 @@ class ChromaManager:
             f"schengen: {row.get('Schengen', 'N/A')}",
         ]
         return " | ".join(parts)
-    
+
     def build_metadata(self, row: dict) -> dict:
         """Build structured metadata for filtering and boost scoring."""
         return {
@@ -113,26 +112,26 @@ class ChromaManager:
             "visa_duration": str(row.get("Visa_Duration", "")),
             "visa_income_req": int(row.get("Visa_Income_Req_EUR", 0)),
         }
-    
+
     def ingest_csv(self, csv_path: str) -> int:
         """Read CSV file and ingest all cities into ChromaDB."""
         df = pd.read_csv(csv_path)
         print(f"📊 Loaded CSV: {len(df)} cities, {len(df.columns)} columns")
-        
+
         ids = []
         documents = []
         metadatas = []
-        
+
         for idx, row in df.iterrows():
             row_dict = row.to_dict()
             doc_id = f"nomadmatch_city_{idx}"
             document = self.build_document(row_dict)
             metadata = self.build_metadata(row_dict)
-            
+
             ids.append(doc_id)
             documents.append(document)
             metadatas.append(metadata)
-        
+
         # Upsert in batches of 50
         batch_size = 50
         for i in range(0, len(ids), batch_size):
@@ -141,11 +140,11 @@ class ChromaManager:
                 documents=documents[i:i+batch_size],
                 metadatas=metadatas[i:i+batch_size]
             )
-        
+
         count = self.collection.count()
         print(f"✅ Ingested {count} cities into ChromaDB")
         return count
-    
+
     def search(self, query: str, n_results: int = 15) -> list:
         """Semantic search against ChromaDB. Returns list of results with distances."""
         results = self.collection.query(
@@ -153,7 +152,7 @@ class ChromaManager:
             n_results=min(n_results, self.collection.count() or 50),
             include=["documents", "metadatas", "distances"]
         )
-        
+
         output = []
         if results and results["ids"] and results["ids"][0]:
             for i in range(len(results["ids"][0])):
@@ -164,5 +163,5 @@ class ChromaManager:
                     "distance": results["distances"][0][i] if results["distances"] else 1.0,
                     "base_score": round(1 - results["distances"][0][i], 4) if results["distances"] else 0.0
                 })
-        
+
         return output

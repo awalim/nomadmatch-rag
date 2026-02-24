@@ -1,20 +1,11 @@
-FROM node:18-alpine
+# Usa nginx para servir archivos estáticos
+FROM nginx:alpine
 
-WORKDIR /app
+# Copia los archivos estáticos (la carpeta public) al directorio de nginx
+COPY public /usr/share/nginx/html
 
-# Copiar package files
-COPY package.json ./
+# Expone el puerto 80
+EXPOSE 80
 
-# Instalar dependencias
-RUN npm install --no-package-lock
-
-# Crear directorio public si no existe
-RUN mkdir -p public
-
-# Copiar archivos de la aplicación
-COPY public/ ./public/
-
-EXPOSE 3000
-
-# Comando para servir archivos estáticos
-CMD ["npx", "live-server", "public", "--port=3000", "--host=0.0.0.0", "--no-browser", "--watch=public", "--entry-file=index.html"]
+# Nginx se ejecuta en primer plano
+CMD ["nginx", "-g", "daemon off;"]

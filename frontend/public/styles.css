@@ -815,3 +815,63 @@ body {
 .premium-empty .btn-primary {
     margin-top: 1rem;
 }
+
+/* Botones Match y Skip */
+.btn-match, .btn-skip {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-match.active {
+    background: #ff4d4d;
+    border-color: #ff4d4d;
+    color: white;
+}
+.btn-skip.active {
+    background: #cccccc;
+    border-color: #cccccc;
+    color: #333;
+}
+.action-icon {
+    font-size: 1.2rem;
+}
+
+/* Estilos para Favs */
+.favs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.favs-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+.fav-card {
+    grid-template-columns: 100px 1fr;
+    margin-bottom: 1rem;
+}
+.fav-card .city-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+.fav-card .city-actions button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+}
+.empty-message {
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 1rem 0;
+}

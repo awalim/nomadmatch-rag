@@ -7,6 +7,8 @@
 const API_BASE_URL = 'http://localhost:8000/api/v1';
 let cityImages = {};
 let userPreferences = {}; // {cityName: "like"|"dislike"}
+let hiddenCities = new Set(); // ciudades que el usuario ha skipeado (no se muestran en el feed)
+let lastSearchParams = null;  // opcional, para re-ejecutar búsqueda si es necesario
 
 // Estado Global de Usuario
 let currentUser = {
@@ -266,9 +268,11 @@ function handleTabClick(e) {
     const tab = e.target.dataset.tab;
     document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
     e.target.classList.add('active');
-    
+
     document.getElementById('freeResults').style.display = tab === 'free' ? 'block' : 'none';
     document.getElementById('premiumResults').style.display = tab === 'premium' ? 'block' : 'none';
+    const favsResults = document.getElementById('favsResults');
+    if (favsResults) favsResults.style.display = tab === 'favs' ? 'block' : 'none';
 
     if (tab === 'premium') {
         if (currentUser.isLoggedIn && currentUser.isPremium) {
@@ -276,6 +280,8 @@ function handleTabClick(e) {
         } else {
             showPremiumLocked();
         }
+    } else if (tab === 'favs') {
+        loadFavs();
     }
 }
 
@@ -384,15 +390,15 @@ function loadPremiumAdvice() {
                             </div>
 
                             <div class="city-actions">
-                                <button class="btn-like ${userPreferences[cityName] === 'like' ? 'active' : ''}" onclick="setCityPreference('${cityName}', 'like', this)" title="Me gusta">
+                                <button class="btn-match ${userPreferences[cityName] === 'like' ? 'active' : ''}" onclick="setCityPreference('${cityName}', 'like', this)" title="Match">
                                     <span class="action-icon">❤️</span>
-                                    <span class="action-text">Me gusta</span>
+                                    <span class="action-text">Match</span>
                                 </button>
-                                <button class="btn-dislike ${userPreferences[cityName] === 'dislike' ? 'active' : ''}" onclick="setCityPreference('${cityName}', 'dislike', this)" title="No me gusta">
+                                <button class="btn-skip ${userPreferences[cityName] === 'dislike' ? 'active' : ''}" onclick="setCityPreference('${cityName}', 'dislike', this)" title="Skip">
                                     <span class="action-icon">✖️</span>
-                                    <span class="action-text">No me gusta</span>
+                                    <span class="action-text">Skip</span>
                                 </button>
-                            </div>
+                           </div>
                         </div>
                     </div>
                 `;
@@ -523,7 +529,24 @@ function displayMatches(cities) {
         return;
     }
 
-    container.innerHTML = cities.map((city, i) => {
+    // Filtrar ciudades que están en hiddenCities
+    const filteredCities = cities.filter(city => {
+        const name = city.metadata?.city || '';
+        return !hiddenCities.has(name);
+    });
+
+    if (filteredCities.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-illustration"><span class="empty-emoji">😴</span></div>
+                <h3>No hay ciudades disponibles</h3>
+                <p>Prueba con otras preferencias o revisa tus skips en la pestaña Favs</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = filteredCities.map((city, i) => {
         const m = city.metadata || {};
         const name = m.city || 'Ciudad';
         return `
@@ -545,14 +568,14 @@ function displayMatches(cities) {
                     </div>
                     ${currentUser.isLoggedIn ? `
                     <div class="city-actions">
-                        <button class="btn-like ${userPreferences[name] === 'like' ? 'active' : ''}" onclick="setCityPreference('${name}', 'like', this)" title="Me gusta">
+                        <button class="btn-match ${userPreferences[name] === 'like' ? 'active' : ''}" onclick="setCityPreference('${name.replace(/'/g, "\\'")}', 'like', this)" title="Match">
                             <span class="action-icon">❤️</span>
-                            <span class="action-text">Me gusta</span>
+                            <span class="action-text">Match</span>
                         </button>
-                        <button class="btn-dislike ${userPreferences[name] === 'dislike' ? 'active' : ''}" onclick="setCityPreference('${name}', 'dislike', this)" title="No me gusta">
+                        <button class="btn-skip ${userPreferences[name] === 'dislike' ? 'active' : ''}" onclick="setCityPreference('${name.replace(/'/g, "\\'")}', 'dislike', this)" title="Skip">
                             <span class="action-icon">✖️</span>
-                            <span class="action-text">No me gusta</span>
-                        </button>
+                            <span class="action-text">Skip</span>
+                         </button>    
                     </div>
                     ` : ''}
                 </div>
@@ -577,8 +600,10 @@ async function loadUserPreferences() {
         if (res.ok) {
             const data = await res.json();
             userPreferences = {};
+            hiddenCities.clear();
             (data.preferences || []).forEach(p => {
                 userPreferences[p.city_name] = p.action;
+                if (p.action === 'dislike') hiddenCities.add(p.city_name);
             });
             console.log('✅ Preferencias cargadas:', Object.keys(userPreferences).length);
         }
@@ -589,9 +614,11 @@ async function loadUserPreferences() {
 
 async function setCityPreference(cityName, action, buttonEl) {
     if (!currentUser.token) return;
-    
+
     // Si ya tiene la misma acción, la quitamos (toggle)
+    console.log('setCityPreference called with:', cityName, action, buttonEl);
     if (userPreferences[cityName] === action) {
+        const previousAction = userPreferences[cityName]; // guardar antes de borrar
         try {
             const res = await fetch(`${API_BASE_URL}/preferences/city/${encodeURIComponent(cityName)}`, {
                 method: 'DELETE',
@@ -599,15 +626,17 @@ async function setCityPreference(cityName, action, buttonEl) {
             });
             if (res.ok) {
                 delete userPreferences[cityName];
+                if (previousAction === 'dislike') hiddenCities.delete(cityName);
                 updatePreferenceButtons(cityName);
                 showToast(`Preferencia eliminada para ${cityName}`, 'info');
+                refreshFeed(); // opcional: refrescar feed si está activo
             }
         } catch (err) {
             console.error('Error eliminando preferencia:', err);
         }
         return;
     }
-    
+
     try {
         const res = await fetch(`${API_BASE_URL}/preferences/city`, {
             method: 'POST',
@@ -617,39 +646,50 @@ async function setCityPreference(cityName, action, buttonEl) {
             },
             body: JSON.stringify({ city_name: cityName, action: action })
         });
-        
+
         if (res.ok) {
             userPreferences[cityName] = action;
+
+            // Actualizar hiddenCities
+            if (action === 'dislike') {
+                hiddenCities.add(cityName);
+            } else {
+                hiddenCities.delete(cityName);
+            }
+
             updatePreferenceButtons(cityName);
-            
+
             if (action === 'like') {
                 showToast(`❤️ ${cityName} añadida a favoritas`, 'success');
             } else {
                 showToast(`✖️ ${cityName} no se mostrará en futuras búsquedas`, 'warning');
                 // Animar y ocultar la tarjeta tras dislike
-                const card = buttonEl.closest('.city-card');
-                if (card) {
-                    card.style.transition = 'opacity 0.5s, transform 0.5s';
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateX(100px)';
-                    setTimeout(() => card.remove(), 500);
+                if (buttonEl) {
+                    const card = buttonEl.closest('.city-card');
+                    if (card) {
+                        card.style.transition = 'opacity 0.5s, transform 0.5s';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateX(100px)';
+                        setTimeout(() => card.remove(), 500);
+                    }
                 }
             }
         }
-    } catch (err) {
+    } 
+    catch (err) {
         console.error('Error guardando preferencia:', err);
         showToast('Error al guardar preferencia', 'error');
     }
 }
 
 function updatePreferenceButtons(cityName) {
-    document.querySelectorAll('.city-card.premium-card').forEach(card => {
+    document.querySelectorAll('.city-card').forEach(card => {
         const nameEl = card.querySelector('.city-name');
         if (nameEl && nameEl.textContent === cityName) {
-            const likeBtn = card.querySelector('.btn-like');
-            const dislikeBtn = card.querySelector('.btn-dislike');
-            if (likeBtn) likeBtn.classList.toggle('active', userPreferences[cityName] === 'like');
-            if (dislikeBtn) dislikeBtn.classList.toggle('active', userPreferences[cityName] === 'dislike');
+            const matchBtn = card.querySelector('.btn-match');
+            const skipBtn = card.querySelector('.btn-skip');
+            if (matchBtn) matchBtn.classList.toggle('active', userPreferences[cityName] === 'like');
+            if (skipBtn) skipBtn.classList.toggle('active', userPreferences[cityName] === 'dislike');
         }
     });
 }
@@ -668,4 +708,120 @@ function showToast(message, type = 'info') {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
     }, 3000);
+}
+
+// ============================================
+// FAVS TAB
+// ============================================
+
+async function loadFavs() {
+    const container = document.getElementById('favsResults');
+    if (!container) return;
+
+    if (!currentUser.isLoggedIn) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-illustration"><span class="empty-emoji">🔒</span></div>
+                <h3>Inicia sesión para ver tus favoritos</h3>
+                <button class="btn-primary" onclick="openAuthModal('login')">Iniciar sesión</button>
+            </div>
+        `;
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/preferences/cities`, {
+            headers: { 'Authorization': `Bearer ${currentUser.token}` }
+        });
+        if (!res.ok) throw new Error('Error loading preferences');
+        const data = await res.json();
+        const likes = data.likes || [];
+        const dislikes = data.dislikes || [];
+
+        let html = '<div class="favs-container">';
+
+        // Sección Matches
+        html += '<div class="favs-section"><h3>❤️ Matches</h3>';
+        if (likes.length === 0) {
+            html += '<p class="empty-message">No tienes matches aún</p>';
+        } else {
+            likes.forEach(cityName => {
+                html += createFavCard(cityName, 'like');
+            });
+        }
+        html += '</div>';
+
+        // Sección Skips
+        html += '<div class="favs-section"><h3>✖️ Skips</h3>';
+        if (dislikes.length === 0) {
+            html += '<p class="empty-message">No tienes skips aún</p>';
+        } else {
+            dislikes.forEach(cityName => {
+                html += createFavCard(cityName, 'dislike');
+            });
+        }
+        html += '</div>';
+
+        html += '</div>';
+        container.innerHTML = html;
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = '<div class="empty-state">Error cargando favoritos</div>';
+    }
+}
+
+function createFavCard(cityName, currentAction) {
+    const otherAction = currentAction === 'like' ? 'dislike' : 'like';
+    const otherText = currentAction === 'like' ? 'Mover a Skip' : 'Mover a Match';
+    const otherIcon = currentAction === 'like' ? '✖️' : '❤️';
+    return `
+        <div class="city-card fav-card" data-city="${cityName}">
+            <img class="city-image" src="${getCityImage(cityName)}" alt="${cityName}" onerror="this.src='/thumbnails/default.jpg'">
+            <div class="city-info">
+                <div class="city-header">
+                    <span class="city-name">${cityName}</span>
+                </div>
+                <div class="city-actions">
+                    <button class="btn-outline" onclick="changeFavPreference('${cityName}', '${otherAction}')">
+                        <span class="action-icon">${otherIcon}</span> ${otherText}
+                    </button>
+                    <button class="btn-outline" onclick="deleteFavPreference('${cityName}')">
+                        <span class="action-icon">🗑️</span> Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+async function changeFavPreference(cityName, newAction) {
+    await setCityPreference(cityName, newAction, null); // sin botón, solo actualiza backend
+    loadFavs(); // recargar lista Favs
+    refreshFeed(); // refrescar el feed si es necesario
+}
+
+async function deleteFavPreference(cityName) {
+    if (!currentUser.token) return;
+    try {
+        const res = await fetch(`${API_BASE_URL}/preferences/city/${encodeURIComponent(cityName)}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${currentUser.token}` }
+        });
+        if (res.ok) {
+            delete userPreferences[cityName];
+            if (hiddenCities.has(cityName)) hiddenCities.delete(cityName);
+            loadFavs();
+            refreshFeed();
+            showToast(`Preferencia eliminada para ${cityName}`, 'info');
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+// Refresca el feed de resultados libres si la pestaña está activa
+function refreshFeed() {
+    if (document.querySelector('[data-tab="free"].active')) {
+        findMatches();
+    }
 }

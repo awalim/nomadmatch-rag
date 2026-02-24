@@ -1,185 +1,203 @@
 # 🌍 NomadMatch · Encuentra tu ciudad europea ideal
 
-<p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blueviolet?style=for-the-badge" alt="Version">
-  <img src="https://img.shields.io/badge/stack-RAG%20%7C%20ChromaDB%20%7C%20FastAPI-6E56CF?style=for-the-badge" alt="Stack">
-  <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="License">
-</p>
+![Version](https://img.shields.io/badge/version-5.0.0-blueviolet?style=for-the-badge)
+![Stack](https://img.shields.io/badge/stack-RAG%20%7C%20ChromaDB%20%7C%20FastAPI-6E56CF?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-<p align="center">
-  <b>✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨</b>
-</p>
+**✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨**
 
-<p align="center">
-  <i>🇪🇸 Español · <a href="#english">English</a></i>
-</p>
+*🇪🇸 Español · [English](#-english)*
 
 ---
 
 ## 🎯 ¿Qué es NomadMatch?
 
-**NomadMatch** es un sistema RAG (Retrieval-Augmented Generation) que ayuda a nómadas digitales a encontrar su ciudad europea ideal. 
+**NomadMatch** es un sistema RAG (Retrieval-Augmented Generation) que ayuda a nómadas digitales a encontrar su ciudad europea ideal.
 
 Los usuarios seleccionan sus preferencias (presupuesto, clima, internet, visa, ambiente) y el sistema encuentra **las 3 ciudades con mejor matching** usando embeddings semánticos y búsqueda por similitud vectorial.
 
-### ✨ Características
+---
 
-| | |
-|---|---|
+## ✨ Características
+
+| Feature | Descripción |
+|---------|-------------|
 | 🎨 **Diseño Premium** | Interfaz moderna con gradientes, glows y modo oscuro |
-| 🌍 **Bilingüe** | Toggle ES/EN completamente funcional |
-| 🔍 **Matching Semántico** | Embeddings de OpenAI + ChromaDB |
-| 🏙️ **50+ Ciudades** | Dataset completo de ciudades europeas |
-| 🖼️ **Fotos Reales** | Imágenes de Unsplash por ciudad |
+| 🔍 **Matching Semántico** | Embeddings de OpenAI (`text-embedding-3-small`) + ChromaDB |
+| 🏙️ **50+ Ciudades** | Dataset completo de ciudades europeas con +90 atributos |
+| 🖼️ **Fotos Reales** | Thumbnails por ciudad |
 | 📱 **Responsive** | Funciona en móvil, tablet y desktop |
-| 🔒 **Premium Ready** | Estructura preparada para contenido de pago |
+| 🔐 **Autenticación JWT** | Registro, login, perfil y upgrade a premium |
+| 💎 **Tier Premium** | Datos exclusivos de visados y fiscalidad por ciudad |
+| ❤️ **Match / Skip** | Sistema de favoritos tipo Tinder con persistencia en BD |
+| 📂 **Auto-ingesta** | Los CSVs se cargan automáticamente al levantar Docker |
+| 🐳 **Full Docker** | Un solo `docker-compose up` y listo |
 
 ---
 
 ## 🏗️ Arquitectura
-┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-│ Frontend │────▶│ Backend │────▶│ ChromaDB │
-│ Live │ │ FastAPI │ │ Vectores │
-│ Server │◀────│ REST │◀────│ Embeddings │
-└─────────────┘ └─────────────┘ └─────────────┘
-│
-▼
-┌─────────────┐
-│ OpenAI │
-│ Embeddings │
-└─────────────┘
 
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  Frontend   │────▶│   Backend   │────▶│  ChromaDB   │
+│  Nginx      │     │   FastAPI   │     │  Vectores   │
+│  Port 3000  │◀────│  Port 8000  │◀────│  Embeddings │
+└─────────────┘     └──────┬──────┘     └─────────────┘
+                           │
+                    ┌──────┴──────┐
+                    │   SQLite    │     ┌─────────────┐
+                    │  Users DB   │     │   OpenAI    │
+                    └─────────────┘     │  Embeddings │
+                                        └─────────────┘
+```
+
+**Stack técnico:**
+- **Frontend:** Vanilla JS + CSS (servido por Nginx)
+- **Backend:** FastAPI + Uvicorn
+- **Base de datos vectorial:** ChromaDB (persistente)
+- **Base de datos usuarios:** SQLite + SQLAlchemy
+- **Embeddings:** OpenAI `text-embedding-3-small` (1536 dims)
+- **Autenticación:** JWT (python-jose + bcrypt)
+- **Contenedores:** Docker Compose
 
 ---
 
-## 🚀 Instalación para el equipo (5 minutos)
+## 🚀 Instalación rápida (3 minutos)
 
 ### Prerrequisitos
 
-- Docker y Docker Compose
-- Git
-- OpenAI API Key ([obtener aquí](https://platform.openai.com/api-keys))
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y ejecutándose
+- [Git](https://git-scm.com/)
+- [OpenAI API Key](https://platform.openai.com/api-keys)
 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/nomadmatch-rag.git
+git clone https://github.com/awalim/nomadmatch-rag.git
 cd nomadmatch-rag
+git checkout feature/prototipo-5
+```
 
-## 2. CONFIGURAR VARIABLES PARA EL ENTORNO:
-cp backend/.env.example backend/.env
-nano backend/.env
-# Añade tu OPENAI_API_KEY
+### 2. Configurar la API Key de OpenAI
 
-### 3. LEVANTAR EL SISTEMA:
+**Windows (CMD):**
+```bash
+set OPENAI_API_KEY=sk-proj-TU_CLAVE_AQUI
+```
+
+**Windows (PowerShell):**
+```powershell
+$env:OPENAI_API_KEY="sk-proj-TU_CLAVE_AQUI"
+```
+
+**Mac/Linux:**
+```bash
+export OPENAI_API_KEY=sk-proj-TU_CLAVE_AQUI
+```
+
+### 3. Levantar el sistema
+
+```bash
 docker-compose up --build -d
-sleep 10  # Esperar a que el backend inicie
+```
 
-## 4. CARGAR LOS DATOS:
-# Subir dataset de 50 ciudades
-curl -X POST http://localhost:8000/api/v1/upload \
-  -F "file=@./data/nomadmatch_european_cities.csv"
+### 4. ¡Listo!
 
-### 5. ¡Usar!
-Frontend: http://localhost:3000
+| Servicio | URL |
+|----------|-----|
+| 🌐 **Frontend** | http://localhost:3000 |
+| ⚙️ **Backend API** | http://localhost:8000 |
+| 📖 **Documentación API** | http://localhost:8000/docs |
 
-Backend API: http://localhost:8000
+> **Nota:** Los datos se ingestarán automáticamente en ChromaDB al arrancar. Verifica con: `docker-compose logs -f backend`
 
-Documentación API: http://localhost:8000/docs
+---
 
+## 📁 Estructura del proyecto
 
-### ESTRUCTURA DEL PROYECTO
+```
 nomadmatch-rag/
-├── 📁 backend/               # FastAPI + ChromaDB
+├── 📁 backend/                    # FastAPI + ChromaDB + Auth
 │   ├── 📁 app/
-│   │   ├── 📁 api/          # Endpoints REST
-│   │   ├── 📁 core/         # Configuración
-│   │   ├── 📁 models/       # Schemas Pydantic
-│   │   └── 📁 utils/        # ChromaManager
-│   ├── .env.example         # Variables de entorno
-│   └── requirements.txt     # Dependencias
-├── 📁 frontend/             # Vanilla JS + CSS
-│   ├── 📁 public/           # HTML, CSS, JS, imágenes
-│   ├── Dockerfile          # Node + live-server
-│   └── package.json        # Dependencias frontend
-├── 📁 data/                # Datasets (gitignorados)
-│   ├── sample_cities.csv   # 🔹 MUESTRA (10 ciudades)
-│   └── README.md           # Documentación de datos
-├── 📁 langflow/            # Flow export (opcional)
-├── docker-compose.yml      # Orquestación
-└── README.md              # Este archivo
+│   │   ├── 📁 api/
+│   │   │   ├── auth.py           # Autenticación JWT (register/login/upgrade)
+│   │   │   ├── deps.py           # Dependencias compartidas (get_db, get_current_user)
+│   │   │   └── routes.py         # Endpoints REST (query, upload, preferences, premium)
+│   │   ├── 📁 core/
+│   │   │   └── config.py         # Configuración (CORS, API keys)
+│   │   ├── 📁 models/
+│   │   │   ├── schemas.py        # Schemas Pydantic
+│   │   │   └── user.py           # Modelos SQLAlchemy (User, CityPreference)
+│   │   ├── 📁 utils/
+│   │   │   ├── chroma_utils.py   # ChromaManager (ingesta, búsqueda, scoring)
+│   │   │   ├── llm_utils.py      # Generación de respuestas con OpenAI
+│   │   │   └── scoring.py        # Scoring fiscal y de visados
+│   │   └── main.py               # Punto de entrada + auto-ingesta
+│   ├── 📁 data/
+│   │   └── cities.csv            # Dataset interno (50 ciudades)
+│   ├── Dockerfile
+│   └── requirements.txt
+├── 📁 data/                       # Datasets externos (montados en Docker)
+│   ├── city_general_free.csv     # 50 ciudades · 91 columnas · Tier FREE
+│   ├── city_tax_premium.csv      # 47 ciudades · 17 columnas · Tier PREMIUM (fiscalidad)
+│   └── city_visa_premium.csv     # 47 ciudades · 18 columnas · Tier PREMIUM (visados)
+├── 📁 frontend/
+│   ├── 📁 public/
+│   │   ├── index.html            # HTML principal
+│   │   ├── app.js                # Lógica JS (auth, búsqueda, Match/Skip, Favs)
+│   │   ├── styles.css            # Estilos principales
+│   │   ├── premium-styles.css    # Estilos premium
+│   │   ├── city-images.json      # Mapeo ciudad → imagen
+│   │   └── 📁 thumbnails/       # 50 fotos de ciudades
+│   └── Dockerfile                # Nginx Alpine
+├── 📁 langflow/                   # Flow export (opcional)
+├── docker-compose.yml             # Orquestación Docker
+└── README.md                      # Este archivo
+```
 
+---
 
+## 🔧 API Endpoints
 
-### 🧑‍💻 Flujo de trabajo para el equipo
-1. Cada desarrollador clona
-bash
-git clone https://github.com/tu-usuario/nomadmatch-rag.git
-cd nomadmatch-rag
-cp backend/.env.example backend/.env
+### Públicos (sin autenticación)
 
-# Cada uno pone su propia OpenAI API Key
-docker-compose up --build -d
-2. Rama principal (main) siempre estable
-main → Producción, siempre funcionando
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `GET` | `/api/v1/health` | Estado del sistema y ChromaDB |
+| `GET` | `/api/v1/collections` | Info de colecciones y documentos |
+| `POST` | `/api/v1/upload` | Subir e ingestar un CSV |
+| `POST` | `/api/v1/query` | Búsqueda semántica + ranking |
+| `POST` | `/api/v1/chat` | Chat con recomendaciones |
 
-develop → Integración de features
+### Autenticación
 
-feature/* → Features nuevas
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `POST` | `/api/v1/auth/register` | Crear cuenta |
+| `POST` | `/api/v1/auth/login` | Iniciar sesión → JWT token |
+| `GET` | `/api/v1/auth/me` | Perfil del usuario actual |
+| `PUT` | `/api/v1/auth/preferences` | Actualizar preferencias |
+| `POST` | `/api/v1/auth/upgrade` | Upgrade a Premium |
 
-3. Para añadir una feature
-bash
-git checkout -b feature/nueva-funcionalidad
+### Preferencias de ciudades (requiere login)
 
-# ... trabajar ...
-git add .
-git commit -m "feat: añadida nueva funcionalidad"
-git push origin feature/nueva-funcionalidad
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `POST` | `/api/v1/preferences/city` | Guardar Match (like) o Skip (dislike) |
+| `GET` | `/api/v1/preferences/cities` | Obtener likes y dislikes |
+| `DELETE` | `/api/v1/preferences/city/{name}` | Eliminar preferencia |
 
-# Crear Pull Request en GitHub
-4. Convención de commits
-text
-feat:     Nueva funcionalidad
-fix:      Corrección de bug
-style:    Cambios de formato, CSS
-refactor: Refactorización de código
-docs:     Documentación
-chore:    Cambios en build, docker, etc.
-🔧 API Endpoints
-Método	Endpoint	Descripción
-GET	/api/v1/health	Estado del sistema
-GET	/api/v1/collections	Info de ChromaDB
-POST	/api/v1/upload	Subir CSV
-POST	/api/v1/query	Búsqueda semántica
-POST	/api/v1/chat	Obtener matches
-Ver documentación completa →
+### Premium (requiere login + premium)
 
-### 📊 Dataset
-El proyecto incluye 50 ciudades europeas con +70 atributos cada una:
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `POST` | `/api/v1/premium/advice` | Datos de visados y fiscalidad |
 
-💰 Costos: Alquiler, presupuesto mensual
+> 📖 Documentación interactiva completa en: http://localhost:8000/docs
 
-📶 Internet: Velocidad, fiabilidad
+---
 
-🌡️ Clima: Temperatura verano/invierno, horas de sol
+## 📊 Datasets
 
-🛂 Visa: Disponibilidad, duración, tipo
-
-💼 Tax: NHR, Beckham Law, IP Box, etc.
-
-🎨 Vibes: Playas, vida nocturna, tech hub, etc.
-
-⚠️ IMPORTANTE: El dataset completo (nomadmatch_european_cities.csv) NO se sube a GitHub. Cada desarrollador debe cargarlo localmente con el comando curl proporcionado. Solo se sube sample_cities.csv para pruebas.
-
-### 🤝 Contribuir
-Fork el proyecto
-
-Crea tu rama (git checkout -b feature/amazing-feature)
-
-Commit (git commit -m 'feat: add amazing feature')
-
-Push (git push origin feature/amazing-feature)
-
-Abre un Pull Request
-
-
+El proyecto incluye **3 CSVs** con datos de 50 ciudades eur

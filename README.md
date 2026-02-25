@@ -2,7 +2,7 @@
 *🇪🇸 Español · [🇬🇧 English](#english)*
 
 <div align="center">
-  <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
+  <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo_nomadmatch_banner.png?raw=true" alt="NomadMatch Logo" width="250"/>
   <h1>Encuentra tu Ciudad Europea Ideal</h1>
 </div>
 
@@ -329,7 +329,7 @@ MIT © 2026 NomadMatch Team
 *[🇪🇸 Español](#spanish) · [🇬🇧 English](#english)*
 
 <div align="center">
-  <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
+  <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo_nomadmatch_banner.png.png?raw=true" alt="NomadMatch Logo" width="250"/>
   <h1>Find Your Perfect European City</h1>
 </div>
 

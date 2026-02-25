@@ -144,7 +144,7 @@ nomadmatch-rag/
 │   │   └── cities.csv            # Dataset interno (50 ciudades)
 │   ├── Dockerfile
 │   └── requirements.txt
-├── 📁 data/                       # Datasets externos (montados en Docker)
+├── 📁 data/                      # Datasets externos (montados en Docker)
 │   ├── city_general_free.csv     # 50 ciudades · 91 columnas · Tier FREE
 │   ├── city_tax_premium.csv      # 47 ciudades · 17 columnas · Tier PREMIUM (fiscalidad)
 │   └── city_visa_premium.csv     # 47 ciudades · 18 columnas · Tier PREMIUM (visados)
@@ -155,11 +155,11 @@ nomadmatch-rag/
 │   │   ├── styles.css            # Estilos principales
 │   │   ├── premium-styles.css    # Estilos premium
 │   │   ├── city-images.json      # Mapeo ciudad → imagen
-│   │   └── 📁 thumbnails/       # 50 fotos de ciudades
+│   │   └── 📁 thumbnails/        # 50 fotos de ciudades
 │   └── Dockerfile                # Nginx Alpine
-├── 📁 langflow/                   # Flow export (opcional)
-├── docker-compose.yml             # Orquestación Docker
-└── README.md                      # Este archivo
+├── 📁 langflow/                  # Flow export (opcional)
+├── docker-compose.yml            # Orquestación Docker
+└── README.md                     # Este archivo
 ```
 
 ---

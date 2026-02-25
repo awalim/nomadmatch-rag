@@ -1,3 +1,4 @@
+## 🇪🇸 Español <a name="spanish"></a>
 <div align="center">
   <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
   <h1>Encuentra tu Ciudad Europea Ideal</h1>
@@ -11,9 +12,6 @@
 *🇪🇸 Español · [🇬🇧 English](#english)*
 
 **✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨**
-
-
-## 🇪🇸 Español <a name="spanish"></a>
 
 ---
 

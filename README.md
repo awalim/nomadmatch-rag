@@ -313,8 +313,8 @@ Incorrect API key provided: sk-tu-cl****aqui
 ## 👥 Creadores
 
 - **Jana Liscakova**
-- **Andrea de la Dehesa Demaría**
 - **Aitor Laskurain González**
+- **Andrea de la Dehesa Demaría**
 
 ---
 

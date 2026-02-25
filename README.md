@@ -332,7 +332,7 @@ MIT © 2026 NomadMatch Team
 
 <div align="center">
   <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
-  <h1>Find Your perfect European City</h1>
+  <h1>Find Your Perfect European City</h1>
 </div>
 
 ![Version](https://img.shields.io/badge/version-5.0.0-blueviolet?style=for-the-badge)

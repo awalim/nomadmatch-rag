@@ -13,7 +13,7 @@
 **✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨**
 
 
-##🇪🇸 Español <a name="español"></a>
+## 🇪🇸 Español <a name="spanish"></a>
 
 ---
 

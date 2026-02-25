@@ -1,4 +1,3 @@
-## 🇪🇸 Español <a name="spanish"></a>
 <div align="center">
   <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
   <h1>Encuentra tu Ciudad Europea Ideal</h1>
@@ -9,6 +8,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
+## 🇪🇸 Español <a name="spanish"></a>
 *🇪🇸 Español · [🇬🇧 English](#english)*
 
 **✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨**

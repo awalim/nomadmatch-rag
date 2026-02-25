@@ -1,3 +1,6 @@
+## 🇪🇸 Español <a name="spanish"></a> 
+*🇪🇸 Español · [🇬🇧 English](#english)*
+
 <div align="center">
   <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
   <h1>Encuentra tu Ciudad Europea Ideal</h1>
@@ -8,12 +11,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-*🇪🇸 Español · [🇬🇧 English](#english)*
-
 **✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨**
-
-
-## 🇪🇸 Español <a name="spanish"></a>
 
 ---
 
@@ -21,7 +19,7 @@
 
 **NomadMatch** es un sistema RAG (Retrieval-Augmented Generation) que ayuda a nómadas digitales a encontrar su ciudad europea ideal.
 
-Los usuarios seleccionan sus preferencias (presupuesto, clima, internet, visa, ambiente) y el sistema encuentra **las 3 ciudades con mejor matching** usando embeddings semánticos y búsqueda por similitud vectorial.
+Los usuarios seleccionan sus preferencias (presupuesto, clima, visa, ambiente) y el sistema encuentra **las 3 ciudades con mejor matching** usando embeddings semánticos y búsqueda por similitud vectorial.
 
 ---
 
@@ -144,7 +142,7 @@ nomadmatch-rag/
 │   │   └── cities.csv            # Dataset interno (50 ciudades)
 │   ├── Dockerfile
 │   └── requirements.txt
-├── 📁 data/                       # Datasets externos (montados en Docker)
+├── 📁 data/                      # Datasets externos (montados en Docker)
 │   ├── city_general_free.csv     # 50 ciudades · 91 columnas · Tier FREE
 │   ├── city_tax_premium.csv      # 47 ciudades · 17 columnas · Tier PREMIUM (fiscalidad)
 │   └── city_visa_premium.csv     # 47 ciudades · 18 columnas · Tier PREMIUM (visados)
@@ -155,11 +153,11 @@ nomadmatch-rag/
 │   │   ├── styles.css            # Estilos principales
 │   │   ├── premium-styles.css    # Estilos premium
 │   │   ├── city-images.json      # Mapeo ciudad → imagen
-│   │   └── 📁 thumbnails/       # 50 fotos de ciudades
+│   │   └── 📁 thumbnails/        # 50 fotos de ciudades
 │   └── Dockerfile                # Nginx Alpine
-├── 📁 langflow/                   # Flow export (opcional)
-├── docker-compose.yml             # Orquestación Docker
-└── README.md                      # Este archivo
+├── 📁 langflow/                  # Flow export (opcional)
+├── docker-compose.yml            # Orquestación Docker
+└── README.md                     # Este archivo
 ```
 
 ---
@@ -371,7 +369,7 @@ Users select their preferences (budget, climate, visa, atmosphere) and the syste
 
 ---
 
-## 🏗️ Arquitecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -400,7 +398,7 @@ Users select their preferences (budget, climate, visa, atmosphere) and the syste
 
 ## 🚀 Quick Installation (3 minutes)
 
-### Prerrequisites
+### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y ejecutándose
 - [Git](https://git-scm.com/)

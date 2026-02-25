@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
-  <h1>NomadMatch · Encuentra tu ciudad europea ideal</h1>
+  <h1>Encuentra tu Ciudad Europea Ideal</h1>
 </div>
 
 ![Version](https://img.shields.io/badge/version-5.0.0-blueviolet?style=for-the-badge)
@@ -8,9 +8,12 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
+*🇪🇸 Español · [🇬🇧 English](#english)*
+
 **✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨**
 
-*🇪🇸 Español · [English](#-english)*
+
+##🇪🇸 Español <a name="español"></a>
 
 ---
 
@@ -313,11 +316,347 @@ Incorrect API key provided: sk-tu-cl****aqui
 ## 👥 Creadores
 
 - **Jana Liscakova**
-- **Andrea de la Dehesa Demaría**
 - **Aitor Laskurain González**
+- **Andrea de la Dehesa Demaría**
 
 ---
 
 ## 📄 Licencia
 
 MIT © 2026 NomadMatch Team
+
+---
+
+## 🇬🇧 English <a name="english"></a>
+*[🇪🇸 Español](#spanish) · [🇬🇧 English](#english)*
+
+<div align="center">
+  <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
+  <h1>Find Your perfect European City</h1>
+</div>
+
+![Version](https://img.shields.io/badge/version-5.0.0-blueviolet?style=for-the-badge)
+![Stack](https://img.shields.io/badge/stack-RAG%20%7C%20ChromaDB%20%7C%20FastAPI-6E56CF?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+**✨ City matching system for digital nomads with AI and semantic matching ✨**
+
+
+---
+
+## 🎯 ¿What is NomadMatch?
+
+**NomadMatch** is a RAG (Retrieval-Augmented Generation) system that helps digital nomads find their ideal European city.
+
+Users select their preferences (budget, climate, visa, atmosphere) and the system finds **the 3 best-matching cities** using semantic embeddings and vector similarity search.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🎨 **Premium Design** | Modern interface with gradients, glows, and dark mode |
+| 🔍 **Semantic Matching** | OpenAI embeddings (`text-embedding-3-small`) + ChromaDB |
+| 🏙️ **50+ Cities** | Complete dataset of European cities with +90 attributes |
+| 🖼️ **Real Photos** | Thumbnails per city |
+| 📱 **Responsive** | Works on mobile, tablet, and desktop |
+| 🔐 **JWT Authentication** | Registration, login, profile, and upgrade to premium |
+| 💎 **Premium Tier** | Exclusive visa and tax data by city |
+| ❤️ **Match / Skip** | Tinder-style favorites system with persistence in DB |
+| 📂 **Auto-ingestion** | CSVs are automatically loaded when Docker is launched |
+| 🐳 **Full Docker** | Just one `docker-compose up` and you're ready to go |
+
+
+---
+
+## 🏗️ Arquitecture
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  Frontend   │────▶│   Backend   │────▶│  ChromaDB   │
+│  Nginx      │     │   FastAPI   │     │  Vectors   │
+│  Port 3000  │◀────│  Port 8000  │◀────│  Embeddings │
+└─────────────┘     └──────┬──────┘     └─────────────┘
+                           │
+                    ┌──────┴──────┐
+                    │   SQLite    │     ┌─────────────┐
+                    │  Users DB   │     │   OpenAI    │
+                    └─────────────┘     │  Embeddings │
+                                        └─────────────┘
+```
+
+**Technical stack:**
+- **Frontend:** Vanilla JS + CSS (served by Nginx)
+- **Backend:** FastAPI + Uvicorn
+- **Vector database:** ChromaDB (persistent)
+- **User database:** SQLite + SQLAlchemy
+- **Embeddings:** OpenAI `text-embedding-3-small` (1536 dims)
+- **Authentication:** JWT (python-jose + bcrypt)
+- **Containers:** Docker Compose
+
+---
+
+## 🚀 Quick Installation (3 minutes)
+
+### Prerrequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y ejecutándose
+- [Git](https://git-scm.com/)
+- [OpenAI API Key](https://platform.openai.com/api-keys)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/awalim/nomadmatch-rag.git
+cd nomadmatch-rag
+git checkout prototype-5
+```
+
+### 2. Configure the OpenAI API Key
+
+**Windows (CMD):**
+```bash
+set OPENAI_API_KEY=sk-proj-YOUR_KEY_HERE
+```
+
+**Windows (PowerShell):**
+```powershell
+$env:OPENAI_API_KEY=“sk-proj-YOUR_KEY_HERE”
+```
+
+**Mac/Linux:**
+```bash
+export OPENAI_API_KEY=sk-proj-YOUR_KEY_HERE
+```
+
+### 3. Build up the system
+
+```bash
+docker-compose up --build -d
+```
+
+### 4. Done!
+
+| Service | URL |
+|----------|-----|
+| 🌐 **Frontend** | http://localhost:3000 |
+| ⚙️ **Backend API** | http://localhost:8000 |
+| 📖 **API Documentation** | http://localhost:8000/docs |
+
+> **Note:** Data will be automatically ingested into ChromaDB upon startup. Verify with: `docker-compose logs -f backend`
+
+---
+
+## 📁 Project structure
+
+```
+nomadmatch-rag/
+├── 📁 backend/                   # FastAPI + ChromaDB + Auth
+│   ├── 📁 app/
+│   │   ├── 📁 api/
+│   │   │   ├── auth.py           # JWT authentication (register/login/upgrade)
+│   │   │   ├── deps.py           # Shared dependencies (get_db, get_current_user)
+│   │   │   └── routes.py         # REST endpoints (query, upload, preferences, premium)
+│   │   ├── 📁 core/
+│   │   │   └── config.py         # Configuration (CORS, API keys)
+│   │   ├── 📁 models/
+│   │   │   ├── schemas.py        # Pydantic schemas
+│   │   │   └── user.py           # SQLAlchemy models (User, CityPreference)
+│   │   ├── 📁 utils/
+│   │   │   ├── chroma_utils.py   # ChromaManager (ingestion, search, scoring)
+│   │   │   ├── llm_utils.py      # Response generation with OpenAI
+│   │   │   └── scoring.py        # Tax and visa scoring
+│   │   └── main.py               # Entry point + auto-ingest
+│   ├── 📁 data/
+│   │   └── cities.csv            # Internal dataset (50 cities)
+│   ├── Dockerfile
+│   └── requirements.txt
+├── 📁 data/                      # External datasets (mounted in Docker)
+│   ├── city_general_free.csv     # 50 cities · 91 columns · FREE Tier
+│   ├── city_tax_premium.csv      # 47 cities · 17 columns · PREMIUM Tier (taxation)
+│   └── city_visa_premium.csv     # 47 cities · 18 columns · PREMIUM Tier (visas)
+├── 📁 frontend/
+│   ├── 📁 public/
+│   │   ├── index.html            # Main HTML
+│   │   ├── app.js                # JS logic (auth, search, Match/Skip, Favs)
+│   │   ├── styles.css            # Main styles
+│   │   ├── premium-styles.css    # Premium styles
+│   │   ├── city-images.json      # City → image mapping
+│   │   └── 📁 thumbnails/        # 50 city photos
+│   └── Dockerfile                # Nginx Alpine
+├── 📁 langflow/                  # Flow export (optional)
+├── docker-compose.yml            # Docker orchestration
+└── README.md                     # This file
+
+```
+
+---
+
+## 🔧 API Endpoints
+
+### Public (no authentication required)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/v1/health` | System status and ChromaDB |
+| `GET` | `/api/v1/collections` | Collection and document info |
+| `POST` | `/api/v1/upload` | Upload and ingest a CSV |
+| `POST` | `/api/v1/query` | Semantic search + ranking |
+| `POST` | `/api/v1/chat` | Chat with recommendations |
+
+### Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/v1/auth/register` | Create account |
+| `POST` | `/api/v1/auth/login` | Log in → JWT token |
+| `GET` | `/api/v1/auth/me` | Current user profile |
+| `PUT` | `/api/v1/auth/preferences` | Update preferences |
+| `POST` | `/api/v1/auth/upgrade` | Upgrade to Premium |
+
+### City preferences (requires login)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/v1/preferences/city` | Save Match (like) or Skip (dislike) |
+| `GET` | `/api/v1/preferences/cities` | Get likes and dislikes |
+| `DELETE` | `/api/v1/preferences/city/{name}` | Delete preference |
+
+### Premium (requires login + premium)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/v1/premium/advice` | Visa and tax data |
+
+> 📖 Complete interactive documentation at: http://localhost:8000/docs
+
+---
+
+
+## 📊 Datasets
+
+The project includes **3 CSVs** with data from 50 European cities:
+
+### `city_general_free.csv` (91 columns)
+General data accessible to all users:
+- 💰 **Costs:** Rent (studio, 1BR, 2BR, 3BR), monthly budget, coworking
+- 📶 **Internet:** Speed (Mbps), reliability
+- 🌡️ **Climate:** Temperature by season, hours of sunshine, rainfall, humidity
+- 🏥 **Life:** Safety, healthcare, transportation, biking, walkability
+- 👥 **Community:** Expat size, nomad scene, English level
+- 🎨 **Vibes:** Nightlife, dating, family, startups, outdoors, art, LGBTQ+
+
+### `city_visa_premium.csv` (18 columns)
+Exclusive premium data on digital nomad visas:
+- 🛂 Visa type, duration, eligibility
+- 💶 Minimum income requirement
+- 📅 Minimum/maximum stay
+- 🇪🇺 Schengen area
+
+### `city_tax_premium.csv` (17 columns)
+Exclusive premium data on taxation:
+- 📊 Standard and special tax rates
+- 🏛️ Special regimes (NHR, Beckham Law, IP Box, etc.)
+- ⏰ Years of tax benefits
+- 🏆 Tax and global scoring
+
+---
+
+### ❤️ Match/Skip System
+
+Registered users can interact with cities:
+
+- ❤️ Match: Mark the city as a favourite (red button). The card remains visible.
+- **✖️ Skip:** Discard the city (slide-out animation). It is hidden from the feed.
+- **📋 Favs tab:** List of Matches and Skips. You can change your mind or delete.
+- **🔄 Change of mind:** Moving from Skip to Match (or vice versa) automatically updates the feed.
+
+---
+
+## 🧑‍💻 Workflow for the team
+
+### Branches
+
+| Branch | Use |
+|------|-----|
+| `main` | Production, always stable |
+| `develop` | Feature integration |
+| `feature/*` | New features (e.g., `feature/prototype-5`) |
+
+### Commit convention
+
+```
+feat:     New functionality
+fix:      Bug fix
+style:    Formatting changes, CSS
+refactor: Code refactoring
+docs:     Documentation
+chore:    Changes to build, docker, etc.
+```
+
+### To add a feature
+
+```bash
+git checkout -b feature/new-functionality
+# ... work ...
+git add .
+git commit -m “feat: feature description”
+git push origin feature/new-functionality
+# → Create Pull Request on GitHub
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Docker Desktop is not running
+```
+open //./pipe/dockerDesktopLinuxEngine: The system cannot find the specified file
+```
+→ Open Docker Desktop and wait for it to be ready before running `docker-compose up`.
+
+### Port already in use
+```
+Bind for 0.0.0.0:3000 failed: port is already allocated
+```
+→ Run `docker ps --filter “publish=3000”`, stop the container that is using it, or change the port in `docker-compose.yml`.
+
+### Invalid API Key (error 401 on ingestion)
+```
+Incorrect API key provided: sk-tu-cl****here
+```
+→ Set your real API key: `set OPENAI_API_KEY=sk-proj-YOUR_REAL_KEY` and run `docker-compose down && docker-compose up --build -d`.
+
+### ChromaDB empty after restarting
+→ Data is persisted in a Docker volume (`chroma_data`). If you deleted the volume (`docker-compose down -v`), auto-ingest will reload it on the next startup.
+
+---
+
+## 🤝 Contribute
+
+1. Fork the project
+2. Create your branch (`git checkout -b feature/amazing-feature`)
+3. Commit (`git commit -m ‘feat: add amazing feature’`)
+4. Push (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 👥 Creators
+
+- **Jana Liscakova**
+- **Aitor Laskurain González**
+- **Andrea de la Dehesa Demaría**
+
+---
+
+## 📄 Licence
+
+MIT © 2026 NomadMatch Team
+
+---
+
+
+

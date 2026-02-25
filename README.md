@@ -1,3 +1,6 @@
+## 🇪🇸 Español <a name="spanish"></a> 
+*🇪🇸 Español · [🇬🇧 English](#english)*
+
 <div align="center">
   <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
   <h1>Encuentra tu Ciudad Europea Ideal</h1>
@@ -8,9 +11,6 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-## 🇪🇸 Español <a name="spanish"></a>
-*🇪🇸 Español · [🇬🇧 English](#english)*
-
 **✨ Sistema de recomendación de ciudades para nómadas digitales con IA y matching semántico ✨**
 
 ---
@@ -19,7 +19,7 @@
 
 **NomadMatch** es un sistema RAG (Retrieval-Augmented Generation) que ayuda a nómadas digitales a encontrar su ciudad europea ideal.
 
-Los usuarios seleccionan sus preferencias (presupuesto, clima, internet, visa, ambiente) y el sistema encuentra **las 3 ciudades con mejor matching** usando embeddings semánticos y búsqueda por similitud vectorial.
+Los usuarios seleccionan sus preferencias (presupuesto, clima, visa, ambiente) y el sistema encuentra **las 3 ciudades con mejor matching** usando embeddings semánticos y búsqueda por similitud vectorial.
 
 ---
 
@@ -369,7 +369,7 @@ Users select their preferences (budget, climate, visa, atmosphere) and the syste
 
 ---
 
-## 🏗️ Arquitecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -398,7 +398,7 @@ Users select their preferences (budget, climate, visa, atmosphere) and the syste
 
 ## 🚀 Quick Installation (3 minutes)
 
-### Prerrequisites
+### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y ejecutándose
 - [Git](https://git-scm.com/)

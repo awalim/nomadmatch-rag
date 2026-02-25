@@ -1,4 +1,7 @@
-# 🌍 NomadMatch · Encuentra tu ciudad europea ideal
+<div align="center">
+  <img src="https://github.com/awalim/nomadmatch-rag/blob/prototipo-5/frontend/public/logo-nomadmatch-darkbg-trans.png?raw=true" alt="NomadMatch Logo" width="250"/>
+  <h1>NomadMatch · Encuentra tu ciudad europea ideal</h1>
+</div>
 
 ![Version](https://img.shields.io/badge/version-5.0.0-blueviolet?style=for-the-badge)
 ![Stack](https://img.shields.io/badge/stack-RAG%20%7C%20ChromaDB%20%7C%20FastAPI-6E56CF?style=for-the-badge)
@@ -304,6 +307,14 @@ Incorrect API key provided: sk-tu-cl****aqui
 3. Commit (`git commit -m 'feat: add amazing feature'`)
 4. Push (`git push origin feature/amazing-feature`)
 5. Abre un Pull Request
+
+---
+
+## 👥 Creadores
+
+- **Jana Liscakova**
+- **Andrea de la Dehesa Demaría**
+- **Aitor Laskurain González**
 
 ---
 

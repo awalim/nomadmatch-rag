@@ -9,7 +9,6 @@ services:
       - ./data:/app/external_data              # CSVs para ingesta
     environment:
       - LANGFLOW_AUTO_LOGIN=true
-      - LANGFLOW_SKIP_AUTH_AUTO_LOGIN=true
       - LANGFLOW_STORE=false
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - CHROMA_PERSIST_DIR=/app/chroma_data

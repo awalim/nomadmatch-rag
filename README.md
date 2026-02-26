@@ -46,8 +46,8 @@ El usuario selecciona sus preferencias en un onboarding visual (presupuesto, cli
 ```
 ┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
 │    Frontend      │─────▶│    Backend       │─────▶│    ChromaDB      │
-│  Vanilla JS/CSS  │      │    FastAPI        │      │  50 ciudades    │
-│    Port 3000     │◀─────│    Port 8000     │◀─────│  embeddings      │
+│  Vanilla JS/CSS  │      │    FastAPI       │      │   50 ciudades    │
+│    Port 3000     │◀─────│    Port 8000     │◀─────│   Embeddings     │
 └──────────────────┘      └────────┬─────────┘      └──────────────────┘
                                    │
                     ┌──────────────┴──────────────┐
@@ -555,8 +555,8 @@ Users select their preferences in a visual onboarding (budget, climate, digital 
 ```
 ┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
 │    Frontend      │─────▶│    Backend       │─────▶│    ChromaDB      │
-│  Vanilla JS/CSS  │      │    FastAPI        │      │  50 cities      │
-│    Port 3000     │◀─────│    Port 8000     │◀─────│  embeddings      │
+│  Vanilla JS/CSS  │      │    FastAPI       │      │    50 cities     │
+│    Port 3000     │◀─────│    Port 8000     │◀─────│    Embeddings    │
 └──────────────────┘      └────────┬─────────┘      └──────────────────┘
                                    │
                     ┌──────────────┴──────────────┐

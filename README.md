@@ -46,16 +46,16 @@ El usuario selecciona sus preferencias en un onboarding visual (presupuesto, cli
 ```
 ┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
 │    Frontend      │─────▶│    Backend       │─────▶│    ChromaDB      │
-│  Vanilla JS/CSS  │      │    FastAPI        │      │  50 ciudades     │
+│  Vanilla JS/CSS  │      │    FastAPI        │      │  50 ciudades    │
 │    Port 3000     │◀─────│    Port 8000     │◀─────│  embeddings      │
 └──────────────────┘      └────────┬─────────┘      └──────────────────┘
                                    │
                     ┌──────────────┴──────────────┐
                     │                             │
              ┌──────▼──────┐             ┌────────▼────────┐
-             │   SQLite    │             │    Langflow      │
-             │  Users +    │             │  Retrieve Flow   │
-             │  Swipes DB  │             │  GPT-4o-mini     │
+             │   SQLite    │             │    Langflow     │
+             │  Users +    │             │  Retrieve Flow  │
+             │  Swipes DB  │             │  GPT-4o-mini    │
              └─────────────┘             └────────┬────────┘
                                                   │
                                          ┌────────▼────────┐
@@ -134,44 +134,44 @@ nomadmatch-rag/
 ├── 📁 backend/                    # FastAPI + ChromaDB + Auth
 │   ├── 📁 app/
 │   │   ├── 📁 api/
-│   │   │   ├── auth.py           # Autenticación JWT (register/login/upgrade)
-│   │   │   ├── deps.py           # Dependencias compartidas (get_db, get_current_user)
-│   │   │   └── routes.py         # Endpoints REST (query, upload, preferences, premium)
+│   │   │   ├── auth.py            # Autenticación JWT (register/login/upgrade)
+│   │   │   ├── deps.py            # Dependencias compartidas (get_db, get_current_user)
+│   │   │   └── routes.py          # Endpoints REST (query, upload, preferences, premium)
 │   │   ├── 📁 core/
 │   │   │   ├── config.py          # Configuración (CORS, API keys)
 │   │   │   └── langflow_client.py # Cliente HTTP para llamar a Langflow
 │   │   ├── 📁 models/
-│   │   │   ├── schemas.py        # Schemas Pydantic
-│   │   │   └── user.py           # Modelos SQLAlchemy (User, CityPreference)
+│   │   │   ├── schemas.py         # Schemas Pydantic
+│   │   │   └── user.py            # Modelos SQLAlchemy (User, CityPreference)
 │   │   ├── 📁 utils/
-│   │   │   ├── chroma_utils.py   # ChromaManager (ingesta, búsqueda, scoring)
-│   │   │   ├── llm_utils.py      # Generación de respuestas con OpenAI
-│   │   │   └── scoring.py        # Scoring fiscal y de visados
-│   │   └── main.py               # Punto de entrada + auto-ingesta
+│   │   │   ├── chroma_utils.py    # ChromaManager (ingesta, búsqueda, scoring)
+│   │   │   ├── llm_utils.py       # Generación de respuestas con OpenAI
+│   │   │   └── scoring.py         # Scoring fiscal y de visados
+│   │   └── main.py                # Punto de entrada + auto-ingesta
 │   ├── 📁 data/
-│   │   └── cities.csv            # Dataset interno (50 ciudades)
+│   │   └── cities.csv             # Dataset interno (50 ciudades)
 │   ├── Dockerfile
 │   └── requirements.txt
-├── 📁 data/                      # Datasets externos (montados en Docker)
+├── 📁 data/                       # Datasets externos (montados en Docker)
 │   ├── city_general_free.csv      # 50 ciudades · 91 columnas · Tier FREE
 │   ├── city_tax_premium.csv       # 47 ciudades · 17 columnas · Tier PREMIUM (fiscalidad)
 │   └── city_visa_premium.csv      # 47 ciudades · 18 columnas · Tier PREMIUM (visados)
-├── 📁 flows/                     # ⭐ NUEVO en prototype-5-v2
-│   ├── nomadmatch_load_flow.json     # Flow de ingesta: CSVs → ChromaDB
-│   └── nomadmatch_retrieve_flow.json # Flow de recomendación: query → LLM → JSON
-├── 📁 langflow/                  # Flow legacy (referencia)
+├── 📁 flows/                          # ⭐ NUEVO en prototype-5-v2
+│   ├── nomadmatch_load_flow.json      # Flow de ingesta: CSVs → ChromaDB
+│   └── nomadmatch_retrieve_flow.json  # Flow de recomendación: query → LLM → JSON
+├── 📁 langflow/                   # Flow legacy (referencia)
 │   └── nomadmatch_langflow.json
 ├── 📁 frontend/
 │   ├── 📁 public/
-│   │   ├── index.html            # HTML principal
-│   │   ├── app.js                # Lógica JS (auth, búsqueda, Match/Skip, Favs)
-│   │   ├── styles.css            # Estilos principales
-│   │   ├── premium-styles.css    # Estilos premium
-│   │   ├── city-images.json      # Mapeo ciudad → imagen
-│   │   └── 📁 thumbnails/        # 50 fotos de ciudades
-│   └── Dockerfile                # Nginx Alpine
-├── docker-compose.yml            # Orquestación Docker
-└── README.md                     # Este archivo
+│   │   ├── index.html             # HTML principal
+│   │   ├── app.js                 # Lógica JS (auth, búsqueda, Match/Skip, Favs)
+│   │   ├── styles.css             # Estilos principales
+│   │   ├── premium-styles.css     # Estilos premium
+│   │   ├── city-images.json       # Mapeo ciudad → imagen
+│   │   └── 📁 thumbnails/         # 50 fotos de ciudades
+│   └── Dockerfile                 # Nginx Alpine
+├── docker-compose.yml             # Orquestación Docker
+└── README.md                      # Este archivo
 ```
 
 ---
@@ -555,16 +555,16 @@ Users select their preferences in a visual onboarding (budget, climate, digital 
 ```
 ┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
 │    Frontend      │─────▶│    Backend       │─────▶│    ChromaDB      │
-│  Vanilla JS/CSS  │      │    FastAPI        │      │  50 cities       │
+│  Vanilla JS/CSS  │      │    FastAPI        │      │  50 cities      │
 │    Port 3000     │◀─────│    Port 8000     │◀─────│  embeddings      │
 └──────────────────┘      └────────┬─────────┘      └──────────────────┘
                                    │
                     ┌──────────────┴──────────────┐
                     │                             │
              ┌──────▼──────┐             ┌────────▼────────┐
-             │   SQLite    │             │    Langflow      │
-             │  Users +    │             │  Retrieve Flow   │
-             │  Swipes DB  │             │  GPT-4o-mini     │
+             │   SQLite    │             │    Langflow     │
+             │  Users +    │             │  Retrieve Flow  │
+             │  Swipes DB  │             │  GPT-4o-mini    │
              └─────────────┘             └────────┬────────┘
                                                   │
                                          ┌────────▼────────┐
@@ -653,34 +653,34 @@ nomadmatch-rag/
 │   │   │   ├── schemas.py        # Pydantic schemas
 │   │   │   └── user.py           # SQLAlchemy models (User, CityPreference)
 │   │   ├── 📁 utils/
-│   │   │   ├── chroma_utils.py   # ChromaManager (ingestion, search, scoring)
-│   │   │   ├── llm_utils.py      # Response generation with OpenAI
-│   │   │   └── scoring.py        # Tax and visa scoring
-│   │   └── main.py               # Entry point + auto-ingest
+│   │   │   ├── chroma_utils.py    # ChromaManager (ingestion, search, scoring)
+│   │   │   ├── llm_utils.py       # Response generation with OpenAI
+│   │   │   └── scoring.py         # Tax and visa scoring
+│   │   └── main.py                # Entry point + auto-ingest
 │   ├── 📁 data/
-│   │   └── cities.csv            # Internal dataset (50 cities)
+│   │   └── cities.csv             # Internal dataset (50 cities)
 │   ├── Dockerfile
 │   └── requirements.txt
-├── 📁 data/                      # External datasets (mounted in Docker)
-│   ├── city_general_free.csv     # 50 cities · 91 columns · FREE Tier
-│   ├── city_tax_premium.csv      # 47 cities · 17 columns · PREMIUM Tier (taxation)
-│   └── city_visa_premium.csv     # 47 cities · 18 columns · PREMIUM Tier (visas)
-├── 📁 flows/                     # ⭐ NEW in prototype-5-v2
-│   ├── nomadmatch_load_flow.json     # Ingestion flow: CSVs → ChromaDB
-│   └── nomadmatch_retrieve_flow.json # Recommendation flow: query → LLM → JSON
-├── 📁 langflow/                  # Legacy flow (reference)
+├── 📁 data/                       # External datasets (mounted in Docker)
+│   ├── city_general_free.csv      # 50 cities · 91 columns · FREE Tier
+│   ├── city_tax_premium.csv       # 47 cities · 17 columns · PREMIUM Tier (taxation)
+│   └── city_visa_premium.csv      # 47 cities · 18 columns · PREMIUM Tier (visas)
+├── 📁 flows/                          # ⭐ NEW in prototype-5-v2
+│   ├── nomadmatch_load_flow.json      # Ingestion flow: CSVs → ChromaDB
+│   └── nomadmatch_retrieve_flow.json  # Recommendation flow: query → LLM → JSON
+├── 📁 langflow/                   # Legacy flow (reference)
 │   └── nomadmatch_langflow.json
 ├── 📁 frontend/
 │   ├── 📁 public/
-│   │   ├── index.html            # Main HTML
-│   │   ├── app.js                # JS logic (auth, search, Match/Skip, Favs)
-│   │   ├── styles.css            # Main styles
-│   │   ├── premium-styles.css    # Premium styles
-│   │   ├── city-images.json      # City → image mapping
-│   │   └── 📁 thumbnails/        # 50 city photos
-│   └── Dockerfile                # Nginx Alpine
-├── docker-compose.yml            # Docker orchestration
-└── README.md                     # This file
+│   │   ├── index.html             # Main HTML
+│   │   ├── app.js                 # JS logic (auth, search, Match/Skip, Favs)
+│   │   ├── styles.css             # Main styles
+│   │   ├── premium-styles.css     # Premium styles
+│   │   ├── city-images.json       # City → image mapping
+│   │   └── 📁 thumbnails/         # 50 city photos
+│   └── Dockerfile                 # Nginx Alpine
+├── docker-compose.yml             # Docker orchestration
+└── README.md                      # This file
 ```
 
 ---

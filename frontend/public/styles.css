@@ -875,3 +875,35 @@ body {
     font-style: italic;
     padding: 1rem 0;
 }
+.premium-card .city-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.premium-card .city-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.premium-card .detail-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.premium-card .detail-value {
+    font-size: 1rem;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.premium-card h4 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.3rem;
+}

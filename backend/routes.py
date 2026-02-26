@@ -193,7 +193,7 @@ async def query_cities(request: QueryRequest):
     ranked = rank_cities(results, request.preferences, tier=request.tier)
     
     return {
-        "results": ranked[:3],
+        "results": ranked[:5],
         "total_searched": len(results),
         "query": request.query,
         "tier": request.tier

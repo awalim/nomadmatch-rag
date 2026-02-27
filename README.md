@@ -221,7 +221,7 @@ PROFILE: tier:free|budget_range:900-1200|climate:warm|visa_needed:true|vibes:bea
 |-------|----------|
 | `tier` | `free`, `premium` |
 | `budget_range` | `<900`, `900-1200`, `1200-1600`, `1600-2000` |
-| `climate` | `warm`, `temperate`, `cool` |
+| `climate` | `warm`, `cool`, `cold` |
 | `visa_needed` | `true`, `false` |
 | `vibes` | `beach`, `nightlife`, `historical`, `nature`, `tech_hub`, `foodie`, `art`, `sports` |
 | `nationality` | nombre o código de país |
@@ -730,7 +730,7 @@ PROFILE: tier:free|budget_range:900-1200|climate:warm|visa_needed:true|vibes:bea
 |-------|---------|
 | `tier` | `free`, `premium` |
 | `budget_range` | `<900`, `900-1200`, `1200-1600`, `1600-2000` |
-| `climate` | `warm`, `temperate`, `cool` |
+| `climate` | `warm`, `cool`, `cold` |
 | `visa_needed` | `true`, `false` |
 | `vibes` | `beach`, `nightlife`, `historical`, `nature`, `tech_hub`, `foodie`, `art`, `sports` |
 | `nationality` | country name or code |
